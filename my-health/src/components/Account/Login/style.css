@@ -1,0 +1,65 @@
+.loginPageContainer {
+  font-size: 100dvh;
+  width: 100%;
+}
+
+.loginContainer {
+  flex-direction: column;
+  background-color: white;
+  width: max(20%, 400px);
+  font-size: max(0.03em, 1rem);
+  padding: 0.4em;
+  border-radius: 1em;
+  box-shadow: 5px 5px 10px rgb(202, 202, 202);
+}
+
+.loginForm {
+  width: 100%;
+}
+
+.loginLabels {
+  padding-left: 4%;
+  font-size: 0.8em;
+}
+
+.loginInput {
+  width: 100%;
+  height: max(3.5em, 2.3rem);
+  margin-bottom: 3em;
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 2em;
+  padding: 5%;
+}
+.loginInput:focus {
+  outline: none !important;
+  border: 2px solid #b5d9ff;
+}
+
+.loginButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginCloseButton,
+.loginSubmitButton {
+  font-size: 0.8em;
+  height: 2.3em;
+  width: 39%;
+  border-radius: 2em;
+  border: 2px solid transparent;
+  transition: border 0.4s;
+}
+.loginCloseButton:hover {
+  border-color: black;
+}
+
+.loginSubmitButton {
+  background-color: rgb(45, 22, 194);
+  color: white;
+}
+.loginSubmitButton:hover {
+  color: #fff;
+  background-color: rgb(22, 2, 151);
+  box-shadow: 0px 0px 7px rgba(143, 127, 248, 0.6);
+}
