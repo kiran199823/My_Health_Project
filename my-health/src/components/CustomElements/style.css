@@ -1,3 +1,18 @@
-.labelstyles {
-  font-size: 0.03em;
+.inputStyle {
+  padding-bottom: 15%;
+}
+
+.inputError {
+  border: 1px solid red;
+}
+.inputError:focus {
+  border: 2px solid red;
+}
+
+.errorMessageStyles {
+  padding-left: 1%;
+  position: absolute;
+  font-size: 0.4em;
+  color: red;
+  font-weight: 500;
 }

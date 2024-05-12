@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import { InputField } from "../../CustomElements/InputField";
+import { userNameValidation, passwordValidation } from "../../validations";
 
 const Login = () => {
+  const [userNameError, setUserNameError] = useState({});
+  const [passwordError, setpasswordError] = useState({});
+
+  const onChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === "userName") {
+      setUserNameError(userNameValidation(value));
+    }
+
+    if (name === "password") {
+      setpasswordError(passwordValidation(value));
+    }
+  };
+
   return (
     <>
       <div className="fullScreen flexCenter loginPageContainer">
@@ -15,6 +31,8 @@ const Login = () => {
               labelName="User name"
               id="userName"
               placeholder="User name..."
+              handleOnChnage={onChange}
+              errorMessage={userNameError?.message}
             />
             <InputField
               labelClassName="loginLabels"
@@ -23,6 +41,8 @@ const Login = () => {
               type="password"
               id="password"
               placeholder="Password..."
+              handleOnChnage={onChange}
+              errorMessage={passwordError?.message}
             />
             <div className="loginButtonsContainer">
               <button className="loginCloseButton">Close</button>
