@@ -11,6 +11,15 @@
   padding: 0.4em;
   border-radius: 1em;
   box-shadow: 5px 5px 10px rgb(202, 202, 202);
+  position: relative;
+}
+
+.loadingOverlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(235, 235, 235, 0.5);
+  z-index: 999;
 }
 
 .loginForm {
@@ -62,4 +71,30 @@
   color: #fff;
   background-color: rgb(22, 2, 151);
   box-shadow: 0px 0px 7px rgba(143, 127, 248, 0.6);
+}
+
+/* Animations */
+
+@keyframes loginLoader {
+  from {
+    transform: translateX(-390px);
+  }
+
+  to {
+    transform: translateX(390px);
+  }
+}
+
+.loginLoader {
+  width: 100%;
+  border: 3px solid rgb(56, 56, 231);
+  animation: loginLoader 1.5s infinite;
+  z-index: 1000;
+
+  /* animation-name: loginLoader;
+  animation-duration: 1.5s;
+  animation-timing-function: ease; * default value *
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal; * default */
 }

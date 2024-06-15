@@ -1,13 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Login from "./components/Account/Login";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+import GlobalHeaders from "./components/GlobalHeaders";
+import Login from './components/Account/Login';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Login />
+    <BrowserRouter>
+    <GlobalHeaders />
+      <Routes>
+        <Route path="/" exact element={<></>} />
+        <Route path="/login" exact element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

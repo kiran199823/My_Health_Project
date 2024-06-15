@@ -23,6 +23,8 @@ const Login = () => {
     <>
       <div className="fullScreen flexCenter loginPageContainer">
         <div className="flexCenter loginContainer">
+          <div className="loadingOverlay"></div>
+          <span className="loginLoader"/>
           <h1>Login</h1>
           <form className="loginForm">
             <InputField

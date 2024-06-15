@@ -3,11 +3,20 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: rgb(22, 2, 151);
+  --mani-background-color: rgb(235, 235, 235);
+  --header-color: rgb(255, 255, 255);
+  --shadow-color: rgb(226, 226, 226);
+  /* heights */
+  --search-bar-height: 35px;
+}
+
 body {
   margin: 0;
   font-family: "Rubik", sans-serif;
   font-weight: 400;
-  background-color: rgb(235, 235, 235);
+  background-color: var(--mani-background-color);
   /* background-color: #F2F7FA; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -31,4 +40,8 @@ label {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.verticalLineBar {
+  border: 1px solid var(--shadow-color);
 }
