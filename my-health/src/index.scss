@@ -1,0 +1,58 @@
+@import "src/styles/global/variables";
+
+@font-face {
+  font-family: "MyHealthNeueBlack";
+  src: url("../public/fonts/Neue Plak Text Black.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MyHealthNeueExtraBlack";
+  src: url("../public/fonts/Neue Plak ExtraBlack.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+:root {
+  --search-bar-height: 35px; // only for css, not scss
+}
+
+body {
+  margin: 0;
+  /* font-family: "Rubik", sans-serif; */
+  font-family: "MyHealthNeueBlack", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  background-color: $root-background-gray;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.extraBlack {
+  font-family: "MyHealthNeueExtraBlack", sans-serif;
+}
+
+.fullScreen {
+  height: 100dvh;
+  width: 100vw;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  display: block;
+}
+
+.verticalLineBar {
+  border: 1px solid $shadow-gray;
+}

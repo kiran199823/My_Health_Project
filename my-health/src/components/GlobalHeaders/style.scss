@@ -1,0 +1,78 @@
+@import 'src/styles/global/variables';
+
+.globalHeadersContainers {
+  /* border: 2px solid #000000; */
+  width: 100%;
+  /* font-size: 1rem; */
+  background-color: $white;
+  display: flex;
+}
+
+.headerLogo {
+  // border: 1px solid red;
+  // width: min(20%, 130px);
+  min-width: 111px;
+  margin-left: 1%;
+  color: $myhealth-blue;
+}
+
+.headerSearchContainer {
+  /* border: 1px solid green; */
+  width: 65%;
+  display: flex;
+  align-items: center;
+  padding: 0 1% 0;
+  flex-grow: 1;
+}
+
+.headerSearch {
+  width: 50%;
+  min-height: var(--search-bar-height);
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px 2px $shadow-gray;
+  gap: 1%;
+}
+
+.searchText {
+  width: 90%;
+  height: inherit;
+  border: none;
+  padding: 1%;
+}
+
+.searchDivder {
+  min-height: calc(var(--search-bar-height) - 10px);
+}
+
+.searchLogo {
+  max-height: calc(var(--search-bar-height) - 15px);
+}
+
+.headersignin {
+  // border: 1px solid black;
+  width: min(20%, 270px);
+  margin-right: 1%;
+  padding: min(1%, 10px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3%;
+}
+
+.signinText {
+  height: min(80%, 40px);
+  width: max(30%, 80px);
+  padding-bottom: 2%;
+  border: none;
+  border-radius: 100px;
+  background-color: $medium-blue;
+  color: white;
+  font-family: 'MyHealthNeueBlack', sans-serif;
+  font-size: 15px;
+  transition: 0.5s, ease;
+
+  &:hover {
+    transform: scale(1.01);
+    background-color: $dark-blue;
+  }
+}

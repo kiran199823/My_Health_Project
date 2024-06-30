@@ -1,31 +1,40 @@
 import React from 'react';
-import './style.css';
+import './style.scss';
 import search from '../assets/svgIcons/search.svg';
-import userSignin from '../assets/svgIcons/user.svg';
+import { myHealth } from '../../constants';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { increment } from './globalHeadersReducer/globalHeadersSlice';
+import { useNavigate } from 'react-router-dom';
 
 const GlobalHeaders = () => {
-    const handleClick = () => {
-        alert('need to handle in future')
-    }
+  const navigate = useNavigate();
 
-    return (
-        <div className='globalHeadersContainers'>
-            <div className='headerLogo'>
-                <h2>My Health</h2>
-            </div>
-            <div className='headerSearchContainer'>
-                <div className='headerSearch flexCenter'>
-                    <input className='searchText' type='text' placeholder='Search'/>
-                    <span className='verticalLineBar searchDivder'></span>
-                    <img className='searchLogo' src={search} alt='searchLogo'/>
-                </div>
-            </div>
-            <div className='headerLogin'>
-                <p className='signinText'>signin</p>
-                <img onClick={handleClick} className='signinLogo' src={userSignin} alt='userSignin'/>
-            </div>
+  // const count = useSelector((state) => state.globalHeadersReducer.value);
+  // const dispatch = useDispatch();
+
+  const handleSigninClick = () => {
+    navigate('/signin');
+  };
+
+  return (
+    <div className="globalHeadersContainers">
+      <div className="extraBlack headerLogo">
+        <h2>{myHealth}</h2>
+      </div>
+      <div className="headerSearchContainer">
+        <div className="headerSearch flexCenter">
+          <input className="searchText" type="text" placeholder="Search" />
+          <span className="verticalLineBar searchDivder"></span>
+          <img className="searchLogo" src={search} alt="searchLogo" />
         </div>
-    );
-}
+      </div>
+      <div className="headersignin">
+        <button className="signinText" onClick={handleSigninClick}>
+          Sign in
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default GlobalHeaders;

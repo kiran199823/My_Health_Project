@@ -1,22 +1,29 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
-import "./index.css";
-import GlobalHeaders from "./components/GlobalHeaders";
-import Login from './components/Account/Login';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import reportWebVitals from './reportWebVitals';
+import './index.scss';
+import GlobalComponents from './components/GlobalComponents';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
+import { makeServer } from './Mirage/server';
+import Signin from './components/Account/Signin';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+makeServer();
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-    <GlobalHeaders />
-      <Routes>
-        <Route path="/" exact element={<></>} />
-        <Route path="/login" exact element={<Login />} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <BrowserRouter>
+        <GlobalComponents />
+        <Routes>
+          <Route path="/" exact element={<></>} />
+          <Route path="/signin" exact element={<Signin />} />
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

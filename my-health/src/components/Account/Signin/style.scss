@@ -1,0 +1,23 @@
+@import 'src/styles/global/variables';
+
+.signincontainer {
+  width: 93%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+}
+
+.signinInputField {
+  width: 100%;
+}
+
+.signinCRMessages {
+  color: $light-blue;
+  cursor: pointer;
+}
+
+.signinNext {
+  margin-top: 15%;
+}
