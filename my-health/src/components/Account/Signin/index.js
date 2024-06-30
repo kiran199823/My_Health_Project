@@ -5,8 +5,14 @@ import { userNameValidation } from '../../validations';
 import { myHealthShortHand } from '../../../constants';
 import { InputField } from '../../CustomElements/InputField';
 import { Button } from '../../CustomElements/Button';
+import { apiRequest } from '../../../request';
+import { useDispatch, useSelector } from 'react-redux';
+import { findEmailCall, findEmailSuccess } from './signinReducer/signinSlice';
 
 const Signin = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.signinSlice.findEmail.loading);
+
   const [errors, setErrors] = useState();
 
   const fieldValidation = (value) => {
@@ -21,6 +27,10 @@ const Signin = () => {
       setErrors(errorMessage);
     } else {
       setErrors('');
+      dispatch(findEmailCall());
+      apiRequest('/findemail', { method: 'post', data: emailOrPhone.value })
+        .then((data) => dispatch(findEmailSuccess(data)))
+        .catch((error) => console.log('error', error));
     }
   };
 
@@ -36,6 +46,7 @@ const Signin = () => {
       leftTopLogo={myHealthShortHand}
       leftMiddleHeading="Sign in"
       leftBottomMessage="Use your Registred Account"
+      isLoading={loading}
     >
       <form className="signincontainer" onSubmit={handleOnSubmit}>
         <div className="signinInputField">

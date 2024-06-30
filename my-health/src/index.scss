@@ -1,15 +1,15 @@
-@import "src/styles/global/variables";
+@import 'src/styles/global/variables';
 
 @font-face {
-  font-family: "MyHealthNeueBlack";
-  src: url("../public/fonts/Neue Plak Text Black.ttf") format("truetype");
+  font-family: 'MyHealthNeueBlack';
+  src: url('../public/fonts/Neue Plak Text Black.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "MyHealthNeueExtraBlack";
-  src: url("../public/fonts/Neue Plak ExtraBlack.ttf") format("truetype");
+  font-family: 'MyHealthNeueExtraBlack';
+  src: url('../public/fonts/Neue Plak ExtraBlack.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,7 +26,7 @@
 body {
   margin: 0;
   /* font-family: "Rubik", sans-serif; */
-  font-family: "MyHealthNeueBlack", sans-serif;
+  font-family: 'MyHealthNeueBlack', sans-serif;
   font-weight: 400;
   font-size: 15px;
   background-color: $root-background-gray;
@@ -35,7 +35,7 @@ body {
 }
 
 .extraBlack {
-  font-family: "MyHealthNeueExtraBlack", sans-serif;
+  font-family: 'MyHealthNeueExtraBlack', sans-serif;
 }
 
 .fullScreen {
@@ -55,4 +55,40 @@ label {
 
 .verticalLineBar {
   border: 1px solid $shadow-gray;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  width: 100%;
+}
+
+.load {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.3%;
+  background-color: $light-blue;
+  animation: load 3s infinite;
+  z-index: 1000;
+}
+
+@keyframes load {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 100%;
+    left: 1%;
+  }
+
+  100% {
+    width: 0;
+    left: 100%;
+  }
 }

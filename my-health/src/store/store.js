@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import globalHeadersReducer from '../components/GlobalHeaders/globalHeadersReducer/globalHeadersSlice';
+import globalHeadersSlice from '../components/GlobalHeaders/globalHeadersReducer/globalHeadersSlice';
+import signinSlice from '../components/Account/Signin/signinReducer/signinSlice';
 
 const store = configureStore({
   reducer: {
-    globalHeadersReducer
+    globalHeadersSlice,
+    signinSlice
   }
 });
 
