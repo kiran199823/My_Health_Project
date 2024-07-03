@@ -1,6 +1,6 @@
 @import 'src/styles/global/variables';
 
-.moveUpLabel {
+.inputCustomStyle + .moveUpLabel {
   top: 5%;
   left: 2%;
   font-size: 0.9rem;
@@ -52,7 +52,7 @@
   font-weight: 500;
 }
 
-label {
+.inputCustomStyle + label {
   position: absolute;
   top: 35%;
   left: 6%;
@@ -80,4 +80,15 @@ label {
     transform: scale(1.01);
     background-color: $dark-blue;
   }
+}
+
+.customButtonCircle {
+  @extend .customButton;
+  border-radius: 100%;
+  width: 40px;
+  background-color: $light-blue;
+}
+
+.customCheckbox {
+  border: 2px;
 }

@@ -41,7 +41,9 @@ export const InputField = (props) => {
         onChange={onChangeInput}
         {...others}
       />
-      <label className={`${labelClassName} ${hasContent ? 'moveUpLabel' : ''}`}>
+      <label
+        className={`${labelClassName} ${hasContent ? 'moveUpLabel' : ''}`}
+      >
         {labelName}
       </label>
       {errorMessage && <p className="errorMessageStyles">{errorMessage}</p>}

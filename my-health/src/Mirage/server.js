@@ -1,21 +1,21 @@
 import { createServer } from 'miragejs';
 
 export function makeServer ({ environment = 'development' } = {}) {
-  const emailData = [
-    { id: 1, email: 'abc@gmail.com' },
-    { id: 2, email: 'xyz@gmail.com' },
-    { id: 3, email: 'kiranmgowda@gmail.com' }
+  const emailsData = [
+    { id: 1, email: 'testing@gmail.com', password: 'Testing@123' },
+    { id: 2, email: 'xyz@gmail.com', password: 'Testing@123' },
+    { id: 3, email: 'kiranmgowda@gmail.com', password: 'Testing@123' }
   ];
 
   const server = createServer({
     environment,
 
-    timing: 5000,
+    timing: 3000,
     routes () {
       this.namespace = 'api';
 
       this.get('/getemail', () => {
-        return emailData;
+        return emailsData;
       });
 
       this.post('/email', (schema, request) => {
@@ -23,10 +23,25 @@ export function makeServer ({ environment = 'development' } = {}) {
         return { ...attrs, id: Math.floor(Math.random() * 1000) };
       });
 
-      this.post('/findemail', (schema, request) => {
+      this.post('/signin/email', (schema, request) => {
         const email = JSON.parse(request.requestBody);
-        const isEmailFound = emailData.find((data) => data.email === email);
-        return isEmailFound ?? 'Not found';
+        const emailData = emailsData.find((data) => data.email === email) ?? '';
+        const responseData = {
+          email: emailData ?? '',
+          isEmailExist: emailData !== ''
+        };
+        return responseData;
+      });
+
+      this.post('/signin/password', (schema, request) => {
+        const password = JSON.parse(request.requestBody);
+        const emailData =
+          emailsData.find((data) => data.password === password) ?? '';
+        const responseData = {
+          email: emailData ?? '',
+          isPasswordMatched: emailData !== ''
+        };
+        return responseData;
       });
 
       this.put('/email/:id', (schema, request) => {
