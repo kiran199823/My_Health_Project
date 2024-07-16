@@ -6,10 +6,8 @@ import GlobalComponents from './components/GlobalComponents';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import { makeServer } from './Mirage/server';
 import Signin from './components/Account/Signin';
-
-makeServer();
+import CreateAccount from './components/Account/CreateAccount';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +18,7 @@ root.render(
         <Routes>
           <Route path="/" exact element={<></>} />
           <Route path="/signin" exact element={<Signin />} />
+          <Route path="/create-account" element={<CreateAccount />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

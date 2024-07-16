@@ -8,5 +8,5 @@ export const formatDate = ({ date, month, year }) => {
 };
 
 export const userRequestBody = (userInfo, password) => {
-  return { ...userInfo, password: password };
+  return { ...userInfo, password };
 };
