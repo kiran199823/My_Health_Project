@@ -1,7 +1,7 @@
 @import 'src/styles/global/variables';
 
 .inputCustomStyle + .moveUpLabel {
-  top: 5%;
+  top: 0%;
   left: 2%;
   font-size: 0.9rem;
   color: $light-blue;
@@ -12,7 +12,7 @@
 .inputStyle {
   width: 100%;
   position: relative;
-  padding: 5% 0 5%;
+  padding: 10px 0 40px;
 }
 
 .inputCustomStyle {
@@ -46,7 +46,6 @@
 
 .errorMessageStyles {
   padding-left: 1%;
-  position: absolute;
   font-size: 0.4em;
   color: red;
   font-weight: 500;
@@ -54,8 +53,8 @@
 
 .inputCustomStyle + label {
   position: absolute;
-  top: 35%;
-  left: 6%;
+  top: 24px;
+  left: 10px;
   color: $gray;
   transition:
     top 0.2s ease,
@@ -66,7 +65,7 @@
 
 .customButton {
   height: min(80%, 40px);
-  width: max(30%, 80px);
+  width: max(30%, 100px);
   padding-bottom: 2%;
   border: none;
   border-radius: 100px;

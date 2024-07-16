@@ -5,6 +5,8 @@ import './style.scss';
 // Reuseable component for input fields
 export const InputField = (props) => {
   const [hasContent, setHasContent] = useState(false);
+  const [enteredValue, setEnteredValue] = useState('');
+  console.log('enteredValue: ', enteredValue);
   const {
     inputClassName,
     labelClassName,
@@ -20,6 +22,7 @@ export const InputField = (props) => {
     const value = event.target.value;
     if (value) {
       setHasContent(true);
+      setEnteredValue(value);
     } else {
       setHasContent(false);
     }
@@ -38,15 +41,14 @@ export const InputField = (props) => {
         id={id}
         name={id}
         type={type}
+        value={enteredValue}
         onChange={onChangeInput}
         {...others}
       />
-      <label
-        className={`${labelClassName} ${hasContent ? 'moveUpLabel' : ''}`}
-      >
+      <label className={`${labelClassName} ${hasContent ? 'moveUpLabel' : ''}`}>
         {labelName}
       </label>
-      {errorMessage && <p className="errorMessageStyles">{errorMessage}</p>}
+      <p className="errorMessageStyles">{errorMessage}</p>
     </div>
   );
 };

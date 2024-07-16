@@ -4,7 +4,8 @@ import { useLocation } from 'react-router-dom';
 
 const GlobalComponents = () => {
   const { pathname } = useLocation();
-  const isAccountPath = pathname === '/signin' || pathname === '/createaccount';
+  const isAccountPath =
+    pathname === '/signin' || pathname === '/create-account';
 
   return <>{!isAccountPath && <GlobalHeaders />}</>;
 };

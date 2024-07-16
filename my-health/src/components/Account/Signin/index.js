@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.scss';
 import AccountLayout from '../AccountLayout';
-import { passwordValidation, userNameValidation } from '../../validations';
-import { myHealthShortHand } from '../../../constants';
+import { passwordValidation, emailValidation } from '../../validations';
 import { InputField } from '../../CustomElements/InputField';
 import { Button } from '../../CustomElements/Button';
 import { apiRequest } from '../../../request';
@@ -35,7 +34,7 @@ const Signin = () => {
   const handleEmailOnSubmit = (event) => {
     event.preventDefault();
     const { emailOrPhone } = event.target.elements;
-    const errorMessage = userNameValidation(emailOrPhone?.value)?.message;
+    const errorMessage = emailValidation(emailOrPhone?.value)?.message;
     if (errorMessage) {
       setErrors(errorMessage);
     } else {
@@ -76,7 +75,6 @@ const Signin = () => {
     <>
       {!isEmailExist && (
         <AccountLayout
-          leftTopLogo={myHealthShortHand}
           leftMiddleHeading="Sign in"
           leftBottomMessage="Use your Registred Account"
           isLoading={loading}
@@ -100,7 +98,6 @@ const Signin = () => {
       )}
       {isEmailExist && (
         <AccountLayout
-          leftTopLogo={myHealthShortHand}
           leftMiddleHeading="Welcome"
           leftBottomMessage={signinData?.email?.email}
           isLoading={loading}
