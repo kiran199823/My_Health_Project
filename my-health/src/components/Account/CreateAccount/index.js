@@ -13,117 +13,98 @@ import {
   phoneValidation
 } from '../../validations';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateUserInfo } from './createAccountReducer/createAccountSlice';
-import { formatDate, userRequestBody } from './utils';
+import { userRequestBody } from './utils';
 import { DropDown } from '../../CustomElements/DropDown';
 import { apiRequest } from '../../../request';
 import { dataEncryption } from '../../../utils';
+import { options } from './constants';
 
 const CreateAccount = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state?.createAccountSlice?.userInfo);
 
   const { params } = useRouteDetails();
 
   const [errorMessages, setErrorMessages] = useState({});
+  const [userDetails, setUserDetails] = useState({
+    email: '',
+    phoneNo: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    date: '',
+    month: '',
+    year: '',
+    gender: '',
+    password: '',
+    confirmPassword: ''
+  });
   const step = params.get('st') || '1';
 
-  const options = [
-    {
-      value: 'male',
-      name: 'Male'
-    },
-    {
-      value: 'female',
-      name: 'female'
-    },
-    {
-      value: 'others',
-      name: 'Others'
-    }
-  ];
+  const handleOnFieldChange = (event) => {
+    // event.target.value, event.target.id
+    const inputField = event.target.id;
+    const inputValue = event.target.value;
+    setUserDetails({ ...userDetails, [inputField]: inputValue });
+  };
 
   const handleOnContactSubmit = (event) => {
     event.preventDefault();
-    const { email, phoneNo } = event.target.elements;
-    const emailErrorMessage = emailValidation(email?.value)?.message;
-    const phoneErrorMessage = phoneValidation(phoneNo?.value)?.message;
+    const { email, phoneNo } = userDetails;
+    const emailErrorMessage = emailValidation(email)?.message;
+    const phoneErrorMessage = phoneValidation(phoneNo)?.message;
     setErrorMessages({ emailErrorMessage, phoneErrorMessage });
     if (!(emailErrorMessage || phoneErrorMessage)) {
-      dispatch(
-        updateUserInfo({
-          email: email?.value,
-          phoneNo: phoneNo?.value
-        })
-      );
       navigate('/create-account?st=2');
     }
   };
 
   const handleOnNameFieldSubmit = (event) => {
     event.preventDefault();
-    const { firstName, middleName, lastName } = event.target.elements;
-    const firstNameErrorMessage = nameValidation(firstName?.value)?.message;
-    const lastNameErrorMessage = nameValidation(lastName?.value)?.message;
+    const { firstName, lastName } = userDetails;
+    const firstNameErrorMessage = nameValidation(firstName)?.message;
+    const lastNameErrorMessage = nameValidation(lastName)?.message;
     setErrorMessages({ firstNameErrorMessage, lastNameErrorMessage });
     if (!(firstNameErrorMessage || lastNameErrorMessage)) {
-      dispatch(
-        updateUserInfo({
-          firstName: firstName?.value,
-          middleName: middleName?.value,
-          lastName: lastName?.value
-        })
-      );
       navigate('/create-account?st=3');
     }
   };
 
   const handleOnBasicFieldSubmit = (event) => {
     event.preventDefault();
-    const genderValue = event.target.elements.gender?.value;
-    const isNotValidDate = dateValidation(event.target.elements);
-    const isNotValidGender = genderValidation(genderValue);
+    const { date, month, year, gender } = userDetails;
+    const isNotValidDate = dateValidation(date, month, year);
+    const isNotValidGender = genderValidation(gender);
 
     const dateErrorMessage = isNotValidDate?.message;
     const genderErrorMessage = isNotValidGender?.message;
     setErrorMessages({ dateErrorMessage, genderErrorMessage });
 
     if (!(isNotValidDate || isNotValidGender)) {
-      const formatedDate = formatDate(event.target.elements);
-      dispatch(
-        updateUserInfo({
-          DOB: formatedDate,
-          gender: genderValue
-        })
-      );
       navigate('/create-account?st=4');
     }
   };
 
-  const handleOnPasswordFieldSubmit = (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
-    const setPasswordValue = event.target.elements?.setPassword?.value;
-    const confirmPasswordValue = event.target.elements?.confirmPassword?.value;
-    const isNotValidPassword = passwordValidation(setPasswordValue);
+    const { password, confirmPassword } = userDetails;
+    const isNotValidPassword = passwordValidation(password);
 
     if (isNotValidPassword) {
       const passwordErrorMessage = isNotValidPassword?.message;
       setErrorMessages({ passwordErrorMessage });
       return;
     }
-    if (confirmPasswordValue !== setPasswordValue) {
+    if (confirmPassword !== password) {
       const passwordMatchErrorMessage = 'Password did not matching';
       setErrorMessages({ passwordMatchErrorMessage });
       return;
     }
 
-    const encryptedPassword = dataEncryption(setPasswordValue);
+    const encryptedPassword = dataEncryption(password);
 
-    const requestData = userRequestBody(userInfo, encryptedPassword);
+    const requestData = userRequestBody(userDetails, encryptedPassword);
 
-    if (userInfo) {
+    if (requestData) {
       apiRequest('api/user', { method: 'post', data: requestData })
         .then((responseMessage) =>
           console.log('responseMessage', responseMessage)
@@ -134,12 +115,14 @@ const CreateAccount = () => {
 
   const contactField = () => {
     return (
-      <form className="nameContainer" onSubmit={handleOnContactSubmit}>
+      <>
         <div className="nameFieldContainer">
           <div className="setPasswordContainer">
             <InputField
               labelName="Email"
               id="email"
+              value={userDetails.email}
+              onChange={handleOnFieldChange}
               errorMessage={errorMessages.emailErrorMessage}
             />
           </div>
@@ -148,65 +131,82 @@ const CreateAccount = () => {
               labelName="Phone no"
               id="phoneNo"
               type="number"
+              value={userDetails.phoneNo}
+              onChange={handleOnFieldChange}
               errorMessage={errorMessages.phoneErrorMessage}
             />
           </div>
         </div>
         <div className="nameButtonContainer">
-          <Button type="submit" text="Next" />
+          <Button text="Next" onClick={handleOnContactSubmit} />
         </div>
-      </form>
+      </>
     );
   };
 
   const nameInputField = () => {
     return (
-      <form className="nameContainer" onSubmit={handleOnNameFieldSubmit}>
+      <>
         <div className="nameFieldContainer">
           <div className="firstNameContainer">
             <InputField
               labelName="First name"
               id="firstName"
+              value={userDetails.firstName}
+              onChange={handleOnFieldChange}
               errorMessage={errorMessages.firstNameErrorMessage}
             />
           </div>
           <div className="middleAndLastNameContainer">
-            <InputField labelName="Middle name (Optional)" id="middleName" />
+            <InputField
+              labelName="Middle name (Optional)"
+              id="middleName"
+              value={userDetails.middleName}
+              onChange={handleOnFieldChange}
+            />
             <InputField
               labelName="Last name"
               id="lastName"
+              value={userDetails.lastName}
+              onChange={handleOnFieldChange}
               errorMessage={errorMessages.lastNameErrorMessage}
             />
           </div>
         </div>
         <div className="nameButtonContainer">
-          <Button type="submit" text="Next" />
+          <Button text="Next" onClick={handleOnNameFieldSubmit} />
         </div>
-      </form>
+      </>
     );
   };
 
   const basicInputField = () => {
     return (
-      <form className="nameContainer" onSubmit={handleOnBasicFieldSubmit}>
+      <>
         <div className="nameFieldContainer">
           <div className="basicDOBContainer">
             <InputField
               labelName="Date"
               id="date"
               type="number"
+              value={userDetails.date}
+              onChange={handleOnFieldChange}
               errorMessage={errorMessages.dateErrorMessage}
             />
             <InputField
               labelName="Month"
               id="month"
               type="number"
+              value={userDetails.month}
+              onChange={handleOnFieldChange}
               errorMessage={!!errorMessages.dateErrorMessage}
             />
             <InputField
               labelName="Year"
               id="year"
               type="number"
+              value={userDetails.year}
+              onChange={handleOnFieldChange}
               errorMessage={!!errorMessages.dateErrorMessage}
             />
           </div>
@@ -215,26 +215,30 @@ const CreateAccount = () => {
               labelName="Gender"
               id="gender"
               options={options}
+              value={userDetails.gender}
+              onChange={handleOnFieldChange}
               errorMessage={errorMessages?.genderErrorMessage}
             />
           </div>
         </div>
         <div className="nameButtonContainer">
-          <Button type="submit" text="Next" />
+          <Button text="Next" onClick={handleOnBasicFieldSubmit} />
         </div>
-      </form>
+      </>
     );
   };
 
   const passwordInputField = () => {
     return (
-      <form className="nameContainer" onSubmit={handleOnPasswordFieldSubmit}>
+      <>
         <div className="nameFieldContainer">
           <div className="setPasswordContainer">
             <InputField
               labelName="Set password"
-              id="setPassword"
+              id="password"
               type="password"
+              value={userDetails.password}
+              onChange={handleOnFieldChange}
               errorMessage={errorMessages.passwordErrorMessage}
             />
           </div>
@@ -243,6 +247,8 @@ const CreateAccount = () => {
               labelName="Confirm password"
               id="confirmPassword"
               type="password"
+              value={userDetails.confirmPassword}
+              onChange={handleOnFieldChange}
               errorMessage={errorMessages.passwordMatchErrorMessage}
             />
           </div>
@@ -250,7 +256,7 @@ const CreateAccount = () => {
         <div className="nameButtonContainer">
           <Button type="submit" text="Next" />
         </div>
-      </form>
+      </>
     );
   };
 
@@ -289,8 +295,10 @@ const CreateAccount = () => {
         leftMiddleHeading={layoutFields(step)?.leftMiddleHeading}
         leftBottomMessage={layoutFields(step)?.leftBottomMessage}
       >
-        {layoutFields(step).renderInputFields}{' '}
-        {/* did not add conditional chaining due to some testing, add it later */}
+        <form className="nameContainer" onSubmit={handleFormSubmit}>
+          {layoutFields(step).renderInputFields}
+          {/* did not add conditional chaining due to some testing, add it later */}
+        </form>
       </AccountLayout>
     </>
   );

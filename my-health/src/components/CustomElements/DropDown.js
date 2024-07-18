@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.scss';
 
 export const DropDown = (props) => {
   const [hasContent, setHasContent] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
-  const { id, options, errorMessage, handleOnChange, labelName, ...others } =
+  const { id, options, errorMessage, onChange, labelName, value, ...others } =
     props;
 
-  const onChangeInput = (event) => {
-    const value = event.target.value;
+  useEffect(() => {
     if (value) {
       setHasContent(true);
-      setSelectedOption(value);
     } else {
       setHasContent(false);
     }
+  }, [value]);
 
-    if (typeof handleOnChange === 'function') {
-      handleOnChange(event);
+  const onChangeInput = (event) => {
+    // add code if needed
+
+    if (typeof onChange === 'function') {
+      onChange(event);
     }
   };
 
@@ -25,7 +26,7 @@ export const DropDown = (props) => {
     <div className="inputStyle">
       <select
         className={`inputCustomStyle ${errorMessage ? 'inputError' : ''}`}
-        value={selectedOption}
+        value={value}
         id={id}
         onChange={onChangeInput}
         {...others}

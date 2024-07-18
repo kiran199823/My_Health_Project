@@ -49,10 +49,10 @@ export const nameValidation = (value) => {
   }
 };
 
-export const dateValidation = ({ date, month, year }) => {
-  const isValidDate = date?.value > 0 && date?.value <= 31;
-  const isValidMonth = month?.value > 0 && month?.value <= 12;
-  const isValidYear = year?.value > 1850 && year?.value <= 2026;
+export const dateValidation = (date, month, year) => {
+  const isValidDate = date > 0 && date <= 31;
+  const isValidMonth = month > 0 && month <= 12;
+  const isValidYear = year > 1850 && year <= 2026;
   if (!(isValidDate && isValidMonth && isValidYear)) {
     return {
       isRequired: true,
@@ -62,7 +62,6 @@ export const dateValidation = ({ date, month, year }) => {
 };
 
 export const genderValidation = (value) => {
-  console.log('value: ', value);
   if (value.length <= 0) {
     return {
       isRequired: true,

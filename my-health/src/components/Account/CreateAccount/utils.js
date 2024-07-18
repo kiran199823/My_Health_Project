@@ -1,12 +1,13 @@
-export const formatDate = ({ date, month, year }) => {
-  const dateValue = date?.value;
-  const monthValue = month?.value;
-  const yearValue = year?.value;
-  if (dateValue && monthValue && yearValue) {
-    return `${date.value}-${month.value}-${year.value}`;
+export const formatDate = (date, month, year) => {
+  if (date && month && year) {
+    return `${date}-${month}-${year}`;
   }
 };
 
-export const userRequestBody = (userInfo, password) => {
-  return { ...userInfo, password };
+export const userRequestBody = (userDetails, encryptedPassword) => {
+  const { date, month, year, ...otherUserInfo } = userDetails;
+  const formatedDate = formatDate(date, month, year);
+  const modifiedData = { ...otherUserInfo, DOB: formatedDate, password: encryptedPassword };
+  delete modifiedData.confirmPassword;
+  return modifiedData;
 };

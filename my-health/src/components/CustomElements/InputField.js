@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 
 // Reuseable component for input fields
 export const InputField = (props) => {
   const [hasContent, setHasContent] = useState(false);
-  const [enteredValue, setEnteredValue] = useState('');
-  console.log('enteredValue: ', enteredValue);
   const {
     inputClassName,
     labelClassName,
     labelName,
     id,
+    value,
     type = 'text',
-    handleOnChange,
+    onChange,
     errorMessage,
     ...others
   } = props;
 
-  const onChangeInput = (event) => {
-    const value = event.target.value;
+  useEffect(() => {
     if (value) {
       setHasContent(true);
-      setEnteredValue(value);
     } else {
       setHasContent(false);
     }
+  }, [value]);
 
-    if (typeof handleOnChange === 'function') {
-      handleOnChange(event);
+  const onChangeInput = (event) => {
+    // add code if needed
+
+    if (typeof onChange === 'function') {
+      onChange(event);
     }
   };
 
@@ -41,7 +42,7 @@ export const InputField = (props) => {
         id={id}
         name={id}
         type={type}
-        value={enteredValue}
+        value={value}
         onChange={onChangeInput}
         {...others}
       />
@@ -58,7 +59,8 @@ InputField.propTypes = {
   labelClassName: PropTypes.any,
   labelName: PropTypes.string,
   id: PropTypes.any,
+  value: PropTypes.any,
   type: PropTypes.string,
-  handleOnChange: PropTypes.func,
+  onChange: PropTypes.func,
   errorMessage: PropTypes.string
 };
