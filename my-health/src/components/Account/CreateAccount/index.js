@@ -18,9 +18,22 @@ import { DropDown } from '../../CustomElements/DropDown';
 import { apiRequest } from '../../../request';
 import { dataEncryption } from '../../../utils';
 import { options } from './constants';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  signupCall,
+  signupCallFail,
+  signupCallSuccess
+} from './createAccountReducer/createAccountSlice';
+import { signinSuccess } from '../Signin/signinReducer/signinSlice';
 
 const CreateAccount = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const isLoading = useSelector(
+    (state) => state.createAccountSlice.signup.loading
+  );
+  console.log('isLoading: ', isLoading);
 
   const { params } = useRouteDetails();
 
@@ -86,7 +99,7 @@ const CreateAccount = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const { password, confirmPassword } = userDetails;
+    const { password, confirmPassword, email } = userDetails;
     const isNotValidPassword = passwordValidation(password);
 
     if (isNotValidPassword) {
@@ -105,11 +118,17 @@ const CreateAccount = () => {
     const requestData = userRequestBody(userDetails, encryptedPassword);
 
     if (requestData) {
+      dispatch(signupCall());
       apiRequest('api/user', { method: 'post', data: requestData })
-        .then((responseMessage) =>
-          console.log('responseMessage', responseMessage)
-        )
-        .catch((error) => console.log('error', error));
+        .then((responseMessage) => {
+          localStorage.setItem('user', JSON.stringify(email));
+          dispatch(signinSuccess())
+          dispatch(signupCallSuccess(responseMessage));
+          navigate('/')
+        })
+        .catch(() => {
+          dispatch(signupCallFail());
+        });
     }
   };
 
@@ -294,6 +313,7 @@ const CreateAccount = () => {
       <AccountLayout
         leftMiddleHeading={layoutFields(step)?.leftMiddleHeading}
         leftBottomMessage={layoutFields(step)?.leftBottomMessage}
+        isLoading={isLoading}
       >
         <form className="nameContainer" onSubmit={handleFormSubmit}>
           {layoutFields(step).renderInputFields}
