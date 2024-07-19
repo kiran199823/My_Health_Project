@@ -6,7 +6,7 @@ import { myHealth } from '../../constants';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../CustomElements/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeSignedInUser } from '../Account/Signin/signinReducer/signinSlice';
+import { intialLoad, removeSignedInUser } from '../Account/Signin/signinReducer/signinSlice';
 
 const GlobalHeaders = () => {
   const navigate = useNavigate();
@@ -27,8 +27,9 @@ const GlobalHeaders = () => {
   };
 
   useEffect(() => {
+    dispatch(intialLoad())
     getUserSignedin();
-  }, []);
+  }, [userSignedin]);
 
   const handleUserIconClick = () => {
     dispatch(removeSignedInUser());

@@ -21,7 +21,7 @@
   border-radius: 5px;
   outline: none;
   border: 1px solid black;
-  padding-left: 5%;
+  padding-left: 2%;
 
   &::placeholder {
     color: transparent;
@@ -65,8 +65,7 @@
 
 .customButton {
   height: min(80%, 40px);
-  width: max(30%, 100px);
-  padding-bottom: 2%;
+  width: max(13%, 100px);
   border: none;
   border-radius: 100px;
   background-color: $medium-blue;

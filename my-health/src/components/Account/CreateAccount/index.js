@@ -33,7 +33,6 @@ const CreateAccount = () => {
   const isLoading = useSelector(
     (state) => state.createAccountSlice.signup.loading
   );
-  console.log('isLoading: ', isLoading);
 
   const { params } = useRouteDetails();
 

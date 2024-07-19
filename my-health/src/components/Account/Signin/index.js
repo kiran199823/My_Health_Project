@@ -21,9 +21,13 @@ const Signin = () => {
   );
 
   const [errors, setErrors] = useState();
+  const [authDetails, setAuthDetails] = useState({
+    emailOrPhone: '',
+    password: ''
+  });
+
   const isEmailExist = signinData?.isEmailExist;
   const isUserSignedin = !!localStorage.getItem('user');
-  console.log('isUserSignedin: ', isUserSignedin);
 
   useEffect(() => {
     if (isUserSignedin) {
@@ -64,12 +68,11 @@ const Signin = () => {
     }
   };
 
-  // implement later if needed otherwise remove it
-  // const handleOnChange = (event) => {
-  //   if (errors) {
-  //     fieldValidation(event);
-  //   }
-  // };
+  const handleOnChange = (event) => {
+    const inputLabel = event.target.id;
+    const inputValue = event.target.value;
+    setAuthDetails({ ...authDetails, [inputLabel]: inputValue });
+  };
 
   return (
     <>
@@ -84,7 +87,8 @@ const Signin = () => {
               <InputField
                 id="emailOrPhone"
                 labelName="Email or Phone"
-                // handleOnChange={handleOnChange}
+                value={authDetails.emailOrPhone}
+                onChange={handleOnChange}
                 errorMessage={errors}
               />
               <p>
@@ -108,7 +112,8 @@ const Signin = () => {
                 id="password"
                 labelName="Enter your password"
                 type="password"
-                // handleOnChange={handleOnChange}
+                value={authDetails.password}
+                onChange={handleOnChange}
                 errorMessage={errors}
               />
               <CheckBox labelName="Show password" />

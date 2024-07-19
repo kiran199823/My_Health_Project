@@ -13,6 +13,12 @@ const signinSlice = createSlice({
     }
   },
   reducers: {
+    intialLoad: (state) => {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        state.user.userData = JSON.parse(userData);
+      }
+    },
     signinCall: (state, action) => {
       state.findEmail.loading = true;
       state.findEmail.loaded = false;
@@ -33,6 +39,6 @@ const signinSlice = createSlice({
   }
 });
 
-export const { signinCall, signinSuccess, removeSignedInUser } =
+export const { signinCall, signinSuccess, removeSignedInUser, intialLoad } =
   signinSlice.actions;
 export default signinSlice.reducer;
