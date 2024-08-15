@@ -25,6 +25,7 @@ import {
   signupCallSuccess
 } from './createAccountReducer/createAccountSlice';
 import { signinSuccess } from '../Signin/signinReducer/signinSlice';
+import { INPUT_STYLE_MEDIUM } from '../../../constants';
 
 const CreateAccount = () => {
   const navigate = useNavigate();
@@ -121,9 +122,9 @@ const CreateAccount = () => {
       apiRequest('api/user', { method: 'post', data: requestData })
         .then((responseMessage) => {
           localStorage.setItem('user', JSON.stringify(email));
-          dispatch(signinSuccess())
+          dispatch(signinSuccess());
           dispatch(signupCallSuccess(responseMessage));
-          navigate('/')
+          navigate('/');
         })
         .catch(() => {
           dispatch(signupCallFail());
@@ -142,6 +143,7 @@ const CreateAccount = () => {
               value={userDetails.email}
               onChange={handleOnFieldChange}
               errorMessage={errorMessages.emailErrorMessage}
+              style={INPUT_STYLE_MEDIUM}
             />
           </div>
           <div className="confirmPasswordContainer">
@@ -246,6 +248,10 @@ const CreateAccount = () => {
     );
   };
 
+  const handleOnSigninClick = () => {
+    navigate('/signin');
+  };
+
   const passwordInputField = () => {
     return (
       <>
@@ -317,6 +323,13 @@ const CreateAccount = () => {
         <form className="nameContainer" onSubmit={handleFormSubmit}>
           {layoutFields(step).renderInputFields}
           {/* did not add conditional chaining due to some testing, add it later */}
+          <p>
+            Already have account?
+            <span className="signinCRMessages" onClick={handleOnSigninClick}>
+              {' '}
+              Signin
+            </span>
+          </p>
         </form>
       </AccountLayout>
     </>

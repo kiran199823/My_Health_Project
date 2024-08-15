@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signinCall, signinSuccess } from './signinReducer/signinSlice';
 import { CheckBox } from '../../CustomElements/CheckBox';
 import { useNavigate } from 'react-router-dom';
+import { INPUT_STYLE_MEDIUM } from '../../../constants';
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -44,7 +45,10 @@ const Signin = () => {
     } else {
       setErrors('');
       dispatch(signinCall());
-      apiRequest('/signin/email', { method: 'post', data: emailOrPhone?.value })
+      apiRequest('api/signin/email', {
+        method: 'post',
+        data: emailOrPhone?.value
+      })
         .then((data) => dispatch(signinSuccess(data)))
         .catch((error) => console.log('error', error));
     }
@@ -59,13 +63,20 @@ const Signin = () => {
     } else {
       setErrors('');
       dispatch(signinCall());
-      apiRequest('/signin/password', { method: 'post', data: password?.value })
+      apiRequest('api/signin/password', {
+        method: 'post',
+        data: password?.value
+      })
         .then((data) => {
           localStorage.setItem('user', JSON.stringify(data?.email?.email));
           dispatch(signinSuccess(data));
         })
         .catch((error) => console.log('error', error));
     }
+  };
+
+  const handleOnCreateAccountClick = () => {
+    navigate('/create-account?st=1');
   };
 
   const handleOnChange = (event) => {
@@ -90,10 +101,17 @@ const Signin = () => {
                 value={authDetails.emailOrPhone}
                 onChange={handleOnChange}
                 errorMessage={errors}
+                style={INPUT_STYLE_MEDIUM} // inline styles
               />
               <p>
                 Not yet registred?
-                <span className="signinCRMessages"> Create&nbsp;account</span>
+                <span
+                  className="signinCRMessages"
+                  onClick={handleOnCreateAccountClick}
+                >
+                  {' '}
+                  Create&nbsp;account
+                </span>
               </p>
             </div>
             <Button type="submit" className="signinNext" text="Next" />

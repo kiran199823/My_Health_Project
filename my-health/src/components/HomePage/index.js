@@ -1,0 +1,38 @@
+import React from 'react';
+import './style.scss';
+import menu from '../assets/svgIcons/menu.svg';
+import globe from '../assets/svgIcons/globe-grid.svg';
+import BookingContainer from './BookingContainer';
+
+const HomePage = () => {
+  const isMobile = true; // get value either from props or state in future
+  return (
+    <div className="homeScreenContainer">
+      {isMobile && (
+        <>
+          <div className="headerContainer">
+            <div className="headerLanguage">
+              <img src={globe} alt="languageIcon" width="19" />
+              <span>Ka</span>
+            </div>
+            <div className="headerSearch flexCenter">
+              <input placeholder="Search.." className="searchBar" />
+            </div>
+            <div className="headerMenu">
+              <img src={menu} alt="menu" width="20" />
+            </div>
+          </div>
+          <div className="bodyContainer">
+            <div className="homePageOffers flexCenter">
+              <p>Offers in future</p>
+            </div>
+            <BookingContainer />
+            <div className="insuranceContainer"></div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default HomePage;

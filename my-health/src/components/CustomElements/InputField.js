@@ -6,7 +6,6 @@ import './style.scss';
 export const InputField = (props) => {
   const [hasContent, setHasContent] = useState(false);
   const {
-    inputClassName,
     labelClassName,
     labelName,
     id,
@@ -36,9 +35,7 @@ export const InputField = (props) => {
   return (
     <div className="inputStyle">
       <input
-        className={`inputCustomStyle ${inputClassName} ${
-          errorMessage ? 'inputError' : ''
-        }`}
+        className={`inputCustomStyle ${errorMessage ? 'inputError' : ''}`}
         id={id}
         name={id}
         type={type}
@@ -55,7 +52,6 @@ export const InputField = (props) => {
 };
 
 InputField.propTypes = {
-  inputClassName: PropTypes.any,
   labelClassName: PropTypes.any,
   labelName: PropTypes.string,
   id: PropTypes.any,

@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 import { Loading } from '../../CustomElements/Loading';
-import { myHealthShortHand } from '../../../constants';
+import { MY_HEALTH_SHORTHAND } from '../../../constants';
 
 const AccountLayout = ({ children, ...props }) => {
-  const { leftMiddleHeading, leftBottomMessage, isLoading } =
-    props;
+  const { leftMiddleHeading, leftBottomMessage, isLoading } = props;
 
   return (
     <>
@@ -14,7 +13,7 @@ const AccountLayout = ({ children, ...props }) => {
         <div className="accountContainer">
           {isLoading && <Loading />}
           <div className="accountMessageContainer">
-            <span className="accountMHLogo">{myHealthShortHand}</span>
+            <span className="accountMHLogo">{MY_HEALTH_SHORTHAND}</span>
             <div>
               <span className="accountaccountText">{leftMiddleHeading}</span>
               <div>

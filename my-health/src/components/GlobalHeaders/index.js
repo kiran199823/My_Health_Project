@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './style.scss';
 import search from '../assets/svgIcons/search.svg';
-import { myHealth } from '../../constants';
-// import { increment } from './globalHeadersReducer/globalHeadersSlice';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../CustomElements/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { intialLoad, removeSignedInUser } from '../Account/Signin/signinReducer/signinSlice';
+import {
+  intialLoad,
+  removeSignedInUser
+} from '../Account/Signin/signinReducer/signinSlice';
 
 const GlobalHeaders = () => {
+  const isMobile = true; // get value either from props or state in future
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userSignedin = useSelector(
@@ -17,9 +19,6 @@ const GlobalHeaders = () => {
 
   const [firstLetter, setFirstLetter] = useState('');
 
-  // const count = useSelector((state) => state.globalHeadersReducer.value);
-  // const dispatch = useDispatch();
-
   const getUserSignedin = () => {
     if (userSignedin) {
       setFirstLetter(userSignedin.charAt(0).toUpperCase());
@@ -27,7 +26,7 @@ const GlobalHeaders = () => {
   };
 
   useEffect(() => {
-    dispatch(intialLoad())
+    dispatch(intialLoad());
     getUserSignedin();
   }, [userSignedin]);
 
@@ -40,30 +39,20 @@ const GlobalHeaders = () => {
   };
 
   return (
-    <div className="globalHeadersContainers">
-      <div className="extraBlack headerLogo">
-        <h2>{myHealth}</h2>
-      </div>
-      <div className="headerSearchContainer">
-        <div className="headerSearch flexCenter">
-          <input className="searchText" type="text" placeholder="Search" />
-          <span className="verticalLineBar searchDivder"></span>
-          <img className="searchLogo" src={search} alt="searchLogo" />
-        </div>
-      </div>
-      <div className="headersignin">
-        {userSignedin && !!firstLetter
-          ? (
-          <Button
-            text={firstLetter}
-            varient="circle"
-            onClick={handleUserIconClick}
-          />
-            )
-          : (
-          <Button text="Sign in" onClick={handleSigninClick} />
-            )}
-      </div>
+    <div>
+      {isMobile && (
+        <>
+          <div className="headerContainer">
+            <div className="header1stRow">
+              <p>Hi User</p>
+            </div>
+            <div className="header2ndRow"></div>
+            <div className="header3rdRow"></div>
+            <div className="header4thRow"></div>
+          </div>
+          <div className='bodyContainer'></div>
+        </>
+      )}
     </div>
   );
 };
