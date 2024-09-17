@@ -88,3 +88,60 @@
 .customCheckbox {
   border: 2px;
 }
+
+.searchSuggestionContainer {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: $white;
+  // padding: 5px;
+
+  .searchSuggestionHeading {
+    width: 100%;
+    height: max(8%, 3.9em);
+    background-color: $light-blue;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+
+    .searchSuggestionHeadingButton {
+      background-color: $light-blue;
+      outline: none;
+      border: none;
+      color: $white;
+      margin-right: 8px;
+    }
+
+    .searchSuggestionHeadingName {
+      color: $white;
+      font-size: 20px;
+    }
+  }
+
+  .searchSuggestionInputContainer {
+    width: 100%;
+    height: max(8%, 3.9em);
+
+    .searchSuggestionInput {
+      border: 1px solid;
+      width: 95%;
+      height: inherit;
+      border-radius: 10px;
+
+      &:hover {
+        border-color: $light-blue;
+      }
+      &:focus {
+        outline: none;
+        border-color: $light-blue;
+      }
+    }
+  }
+
+  .searchSuggestionItems {
+    padding-left: 13px;
+  }
+}

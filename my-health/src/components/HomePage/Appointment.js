@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SearchSuggestion from '../CustomElements/SearchSuggestion';
 
 const Appointment = () => {
+  const [inputPopup, setInputPopup] = useState(false);
+  const handleClick = () => {
+    setInputPopup(true);
+  };
+
+  const handleBack = () => {
+    setInputPopup(false);
+  };
+
+  const items = ['Karnataka', 'Andhara', 'kerala'];
+
   return (
-    <div className='appointmentContainer'>
-      <div>
-        <input placeholder='State' className='appointmentInputs'/>
-        <input placeholder='District' className='appointmentInputs'/>
-      </div>
-      <div>
-        <input placeholder='Hospital' className='appointmentInputs'/>
-        <input placeholder='Specialist' className='appointmentInputs'/>
-      </div>
-      <div>
-        <input placeholder='Doctor' className='appointmentInputs' />
-        <button>Find</button>
-      </div>
+    <div className="appointmentContainer">
+      <input
+        placeholder="State"
+        className="placeInputs"
+        onClick={handleClick}
+      />
+      <input placeholder="District" className="placeInputs" />
+      <input
+        placeholder="Hospital or Doctors name or specilist"
+        className="appointmentInputs"
+      />
+      <input placeholder="Date" />
+      <button type="submit">Search</button>
+      {inputPopup && (
+        <SearchSuggestion
+          placeHolder="Search state"
+          suggestionItems={items}
+          headerName=" Select state"
+          handleBack={handleBack}
+        />
+      )}
     </div>
   );
 };
