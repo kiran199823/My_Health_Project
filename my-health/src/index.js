@@ -9,6 +9,7 @@ import Signin from './components/Account/Signin';
 import CreateAccount from './components/Account/CreateAccount';
 import HomePage from './components/HomePage';
 import GlobalFooterMenu from './components/GlobalFooterMenu';
+import HospitalBooking from './components/HospitalBooking';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,10 +17,11 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<GlobalFooterMenu />}>
+          <Route path="/" element={<GlobalFooterMenu />}>
             <Route index element={<HomePage />} />
             <Route path="/signin" exact element={<Signin />} />
             <Route path="/create-account" element={<CreateAccount />} />
+            <Route path="/hospital-booking" element={<HospitalBooking />} />
           </Route>
         </Routes>
       </BrowserRouter>

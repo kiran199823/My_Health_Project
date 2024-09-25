@@ -15,6 +15,7 @@
     "semi": ["off"], // Disables strict enforcement of semicolons
     "no-extra-semi": "warn", // Disallows unnecessary semicolons
     "brace-style": ["warn", "1tbs", { "allowSingleLine": true }], // Allows single-line blocks
-    "react/prop-types": "warn"
+    "react/prop-types": "warn",
+    "no-trailing-spaces": "warn"
   }
 }

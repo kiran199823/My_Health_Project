@@ -1,28 +1,36 @@
 import React from 'react';
 import './style.scss';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css'; // default styles from react-tabs, overrided in css file
-import Appointment from './Appointment';
+import { bookingItems, gerRedirectPath } from './utils';
+import ImageButtons from '../CustomElements/ImageButtons';
+import { useNavigate } from 'react-router-dom';
 
 const BookingContainer = () => {
+  const navigate = useNavigate();
+
+  const handleOnClick = (buttonName) => {
+    const path = gerRedirectPath(buttonName);
+    navigate(path);
+  };
+
   return (
     <div className="bookingContainer">
-      <Tabs>
-        <div className="headingContainer">
-          <div className="heading">
-            <p>Booking</p>
-          </div>
-
-          <TabList>
-            <Tab>Hospital</Tab>
-            <Tab>Ambulance</Tab>
-            <Tab>Emergency</Tab>
-          </TabList>
-        </div>
-        <TabPanel>
-          <Appointment />
-        </TabPanel>
-      </Tabs>
+      <div className="homeHeading">
+        <p>Booking</p>
+      </div>
+      <div className="bookingBody">
+        {bookingItems &&
+          bookingItems.map(({ name, icon }, index) => {
+            return (
+              <ImageButtons
+                name={name}
+                icon={icon}
+                key={index}
+                handleClick={handleOnClick}
+              />
+            );
+          })}
+      </div>
     </div>
   );
 };

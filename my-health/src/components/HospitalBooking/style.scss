@@ -1,0 +1,70 @@
+@import 'src/styles/global/variables';
+
+.hospitalBookingContainer {
+  width: 100%;
+  height: 100dvh;
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  overflow-y: scroll;
+}
+
+.hospitalBookingBackGroundImage {
+  width: 100%;
+  height: max(150px);
+  color: white;
+  border-radius: 15px;
+  background-color: #5865f2;
+
+  .hospitalBookingHeading {
+    font-size: 2em;
+    padding-left: 5px;
+  }
+}
+
+.hospitalBookingBody {
+  border-radius: 15px;
+  width: 100%;
+  position: absolute;
+  top: max(140px);
+  background-color: $white;
+  padding-top: 8px;
+  display: flex;
+  justify-content: center;
+
+  .hospitalBookingBodyContent {
+    width: 90%;
+  }
+
+  .hospitalBookingBodyContentInputs {
+    width: 95%;
+    height: max(60px);
+    border-radius: 15px;
+    margin-bottom: 15px;
+
+    &::placeholder {
+      font-size: 1.5em;
+      padding-left: 5px;
+    }
+  }
+
+  .hospitalBookingBodyContentButtons {
+    width: 100%;
+    height: max(40px);
+    border-radius: 15px;
+    margin-bottom: 15px;
+    background-color: $buttons-blue;
+    color: $white;
+    font-size: 1.2em;
+    font-family: 'MyHealthNeueExtraBlack', sans-serif;
+  }
+
+  .hospitalBookingBodyContentButtonCancel {
+    @extend .hospitalBookingBodyContentButtons;
+
+    background-color: $white;
+    color: black;
+  }
+}

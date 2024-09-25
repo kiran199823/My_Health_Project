@@ -7,6 +7,7 @@ $twenty-two: 22px;
   width: 100%;
   height: 100dvh;
   background-color: $white;
+  overflow-y: scroll;
 }
 
 .headerContainer {
@@ -59,7 +60,7 @@ $twenty-two: 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 25px;
 
   .homePageOffers {
     color: gray;
@@ -68,66 +69,54 @@ $twenty-two: 22px;
     border-radius: $twenty-two;
     box-shadow:
       // rgba(0, 0, 0, 0.15) 0px 15px 25px,
-      rgba(0, 0, 0, 0.05) 0px 5px 10px;
+      rgba($icon-color, 0.05) 0px 5px 10px;
   }
+}
+
+.homeHeading {
+  margin: 0 0 8px 10px;
+  font-size: 1.2em;
 }
 
 .bookingContainer {
-  height: max(250px, 30%);
+  // height: max(3em);
   width: $box-width;
   border-radius: $twenty-two;
   box-shadow:
-    rgba(0, 0, 0, 0.15) 0px 15px 25px,
-    rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    rgba($shadow-blue, 0.15) 0px 15px 25px,
+    rgba($shadow-blue, 0.05) 0px 5px 10px;
 
-  .headingContainer {
-    background-color: $light-blue;
-    height: max(58px, 3.5em);
-    color: $white;
-
-    .heading {
-      padding-left: $twenty-two;
-      font-size: 1em;
-      height: 26px;
-      display: flex;
-      align-items: center;
-    }
-
-    // overriding default styles from react-tabs
-    // start
-    .react-tabs__tab-list {
-      display: flex;
-      justify-content: center;
-      gap: 2%;
-    }
-    .react-tabs__tab {
-      background-color: inherit;
-      color: $white;
-      font-family: inherit;
-      font-size: 0.98em;
-    }
-    .react-tabs__tab--selected {
-      background-color: $white;
-      color: $light-blue;
-      border: 1px solid $white;
-    }
+  .bookingBody {
+    display: flex;
+    justify-content: space-around;
   }
-
-  .react-tabs__tab-panel {
-    border: 1px solid;
-  }
-  // end
 }
 
-.appointmentContainer {
-  width: 100%;
-  height: 100%;
+.labsContaier {
+  width: $box-width;
 
-  .placeInputs {
-    width: 46%;
+  .labsButtonsContainer {
+    display: flex;
+    justify-content: space-around;
   }
 
-  .appointmentInputs {
-    width: 90%;
+  .labsButton {
+    background-color: $white;
+    width: 45%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: rgba($shadow-blue, 0.1) -4px 9px 25px -6px;
+
+    .labsButtonFontIcon {
+      color: $icon-color;
+      font-size: 30px;
+    }
+
+    .labsButtonName {
+      margin-left: 8px;
+      font-size: 0.9rem;
+    }
   }
 }

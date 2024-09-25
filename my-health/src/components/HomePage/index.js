@@ -3,6 +3,9 @@ import './style.scss';
 import menu from '../assets/svgIcons/menu.svg';
 import globe from '../assets/svgIcons/globe-grid.svg';
 import BookingContainer from './BookingContainer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { labsItems } from './utils';
+import Insurance from './Insurance';
 
 const HomePage = () => {
   const isMobile = true; // get value either from props or state in future
@@ -27,7 +30,26 @@ const HomePage = () => {
               <p>Offers in future</p>
             </div>
             <BookingContainer />
-            <div className="insuranceContainer"></div>
+            <div className="labsContaier">
+              <div className="homeHeading">
+                <p>Labs</p>
+              </div>
+              <div className="labsButtonsContainer">
+                {labsItems &&
+                  labsItems.map(({ name, icon }, index) => {
+                    return (
+                      <button className="labsButton flexCenter" key={index}>
+                        <FontAwesomeIcon
+                          icon={icon}
+                          className="labsButtonFontIcon"
+                        />
+                        <span className="labsButtonName">{name}</span>
+                      </button>
+                    );
+                  })}
+              </div>
+            </div>
+            <Insurance />
           </div>
         </>
       )}
