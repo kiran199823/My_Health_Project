@@ -8,7 +8,7 @@ import {
   faFileMedical
 } from '@fortawesome/free-solid-svg-icons';
 
-export const gerRedirectPath = (buttonName) => {
+export const getRedirectPath = (buttonName) => {
   switch (buttonName) {
     case 'Hospital':
       return '/hospital-booking';

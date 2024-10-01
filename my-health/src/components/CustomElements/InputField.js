@@ -8,10 +8,13 @@ export const InputField = (props) => {
   const {
     labelClassName,
     labelName,
+    inputClassName,
+    placeHolder,
     id,
     value,
     type = 'text',
     onChange,
+    onClick,
     errorMessage,
     ...others
   } = props;
@@ -35,17 +38,23 @@ export const InputField = (props) => {
   return (
     <div className="inputStyle">
       <input
-        className={`inputCustomStyle ${errorMessage ? 'inputError' : ''}`}
+        className={`inputCustomStyle ${inputClassName} ${errorMessage ? 'inputError' : ''}`}
         id={id}
         name={id}
         type={type}
         value={value}
+        onClick={onClick}
         onChange={onChangeInput}
+        placeholder={placeHolder}
         {...others}
       />
-      <label className={`${labelClassName} ${hasContent ? 'moveUpLabel' : ''}`}>
-        {labelName}
-      </label>
+      {labelName && (
+        <label
+          className={`${labelClassName} ${hasContent ? 'moveUpLabel' : ''}`}
+        >
+          {labelName}
+        </label>
+      )}
       <p className="errorMessageStyles">{errorMessage}</p>
     </div>
   );

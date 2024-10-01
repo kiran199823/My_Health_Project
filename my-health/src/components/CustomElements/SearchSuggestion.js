@@ -1,7 +1,8 @@
 import React from 'react';
+import { InputField } from './InputField';
 
 const SearchSuggestion = (props) => {
-  const { placeHolder, suggestionItems, onClick, headerName, handleBack } =
+  const { placeHolder, suggestionItems, onClick, headerName, handleOnBack } =
     props;
   return (
     <div className="searchSuggestionContainer">
@@ -9,19 +10,20 @@ const SearchSuggestion = (props) => {
         <div className="searchSuggestionHeading">
           <button
             className="searchSuggestionHeadingButton"
-            onClick={handleBack}
+            onClick={handleOnBack}
           >
             <span>back i</span>
           </button>
           <p className="searchSuggestionHeadingName">{headerName}</p>
         </div>
       )}
-      <div className='searchSuggestionInputContainer flexCenter'>
-        <input
-          className="searchSuggestionInput"
-          placeholder={placeHolder}
-          onClick={onClick}
-        />
+      <div className="searchSuggestionInputContainer flexCenter">
+        <div className='searchSuggestionInput'>
+          <InputField
+            placeHolder={placeHolder}
+            onClick={onClick}
+          />
+        </div>
       </div>
       {suggestionItems && (
         <div>

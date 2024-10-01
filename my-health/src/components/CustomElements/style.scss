@@ -24,7 +24,9 @@
   padding-left: 2%;
 
   &::placeholder {
-    color: transparent;
+    color: $placeholder-color;
+    font-family: 'MyHealthNeueBlack', sans-serif;
+    font-size: 0.9rem;
   }
 
   &:focus {
@@ -103,14 +105,14 @@
   .searchSuggestionHeading {
     width: 100%;
     height: max(8%, 3.9em);
-    background-color: $light-blue;
+    background-color: $header-color;
     margin-bottom: 5px;
     display: flex;
     align-items: center;
     padding: 5px;
 
     .searchSuggestionHeadingButton {
-      background-color: $light-blue;
+      background-color: $header-color;
       outline: none;
       border: none;
       color: $white;
@@ -128,18 +130,7 @@
     height: max(8%, 3.9em);
 
     .searchSuggestionInput {
-      border: 1px solid;
       width: 95%;
-      height: inherit;
-      border-radius: 10px;
-
-      &:hover {
-        border-color: $light-blue;
-      }
-      &:focus {
-        outline: none;
-        border-color: $light-blue;
-      }
     }
   }
 

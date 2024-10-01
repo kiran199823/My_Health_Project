@@ -9,7 +9,7 @@ import Signin from './components/Account/Signin';
 import CreateAccount from './components/Account/CreateAccount';
 import HomePage from './components/HomePage';
 import GlobalFooterMenu from './components/GlobalFooterMenu';
-import HospitalBooking from './components/HospitalBooking';
+import HospitalBookingContainer from './components/HospitalBooking/HospitalBookingContainer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,7 +21,10 @@ root.render(
             <Route index element={<HomePage />} />
             <Route path="/signin" exact element={<Signin />} />
             <Route path="/create-account" element={<CreateAccount />} />
-            <Route path="/hospital-booking" element={<HospitalBooking />} />
+            <Route
+              path="/hospital-booking"
+              element={<HospitalBookingContainer />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
