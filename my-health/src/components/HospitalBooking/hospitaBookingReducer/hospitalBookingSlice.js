@@ -1,27 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialStateData = () => {
+  return {
+    loading: false,
+    loaded: false,
+    data: ''
+  };
+};
+
 const hospitalBookingSlice = createSlice({
   name: 'hospitalBooking',
   initialState: {
-    stateAndCity: {
-      loading: false,
-      loaded: false,
-      data: {}
-    }
+    state: initialStateData(),
+    city: initialStateData(),
+    hospital: initialStateData()
   },
   reducers: {
-    stateAndCityRequest: (state, action) => {
-      state.stateAndCity.loading = true;
-      state.stateAndCity.loaded = false;
+    stateRequest: (state, action) => {
+      state.state.loading = true;
+      state.state.loaded = false;
     },
-    stateAndCityRequestSuccess: (state, action) => {
-      state.stateAndCity.data = action?.payload;
-      state.stateAndCity.loading = false;
-      state.stateAndCity.loaded = true;
+    stateRequestSuccess: (state, action) => {
+      state.state.data = action?.payload;
+      state.state.loading = false;
+      state.state.loaded = true;
     }
   }
 });
 
-export const { stateAndCityRequest, stateAndCityRequestSuccess } =
+export const { stateRequest, stateRequestSuccess } =
   hospitalBookingSlice.actions;
 export default hospitalBookingSlice.reducer;

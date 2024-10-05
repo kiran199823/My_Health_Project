@@ -2,39 +2,36 @@ import React from 'react';
 import HospitalBooking from '..';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  stateAndCityRequest,
-  stateAndCityRequestSuccess
+  stateRequest,
+  stateRequestSuccess
 } from '../hospitaBookingReducer/hospitalBookingSlice';
 import { apiRequest } from '../../../request';
 
 const HospitalBookingContainer = () => {
   const dispatch = useDispatch();
 
-  const stateAndCityRequestDispatch = () => {
-    dispatch(stateAndCityRequest());
+  const stateRequestDispatch = () => {
+    dispatch(stateRequest());
     apiRequest('api/stateCity', {
       method: 'get'
     })
-      .then((data) => dispatch(stateAndCityRequestSuccess(data)))
+      .then((data) => dispatch(stateRequestSuccess(data)))
       .catch((error) => console.log('getStateCityError', error));
   };
 
-  const stateCityData = useSelector((state) => {
-    const statesAndCitiesData = state?.hospitalBookingSlice?.stateAndCity?.data;
-    if (statesAndCitiesData[0]?.states) {
-      return statesAndCitiesData[0]?.states?.map((data) => data?.state);
+  const statesData = useSelector((state) => {
+    const statesData = state?.hospitalBookingSlice?.state?.data;
+    if (statesData[0]?.states) {
+      return statesData[0]?.states?.map((data) => data?.state);
     }
   });
 
   const handleDispatch = () => ({
-    stateAndCityRequest: () => stateAndCityRequestDispatch()
+    stateRequest: () => stateRequestDispatch()
   });
 
   return (
-    <HospitalBooking
-      dispatch={handleDispatch()}
-      stateCityData={stateCityData}
-    />
+    <HospitalBooking dispatch={handleDispatch()} statesData={statesData} />
   );
 };
 

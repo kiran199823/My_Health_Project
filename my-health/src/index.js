@@ -18,7 +18,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<GlobalFooterMenu />}>
-            <Route index element={<HomePage />} />
+            <Route index element={<HomePage />} /> {/* index is added to make sure home page route is matched along with global footer even after matching '/' to global footer */}
             <Route path="/signin" exact element={<Signin />} />
             <Route path="/create-account" element={<CreateAccount />} />
             <Route
