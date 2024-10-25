@@ -1,60 +1,60 @@
-import React from 'react';
-import './style.scss';
-import menu from '../assets/svgIcons/menu.svg';
-import globe from '../assets/svgIcons/globe-grid.svg';
-import BookingContainer from './BookingContainer';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { labsItems } from './utils';
-import Insurance from './Insurance';
+import { connect } from 'react-redux';
+import HomePageComponent from './HomePageComponent';
+import { createSelector } from '@reduxjs/toolkit';
+import { apiRequest } from '../../request';
+import {
+  fetchCityList,
+  fetchCityListSuccess,
+  fetchStateList,
+  fetchStateListSuccess,
+  resetlocationFields,
+} from './homePageReducer/homePageSlice';
+import { updateGlobalLocation } from '../App/appReducer/appSlice';
 
-const HomePage = () => {
-  const isMobile = true; // get value either from props or state in future
-  return (
-    <div className="homeScreenContainer">
-      {isMobile && (
-        <>
-          <div className="headerContainer">
-            <div className="headerLanguage">
-              <img src={globe} alt="languageIcon" width="19" />
-              <span>Ka</span>
-            </div>
-            <div className="headerSearch flexCenter">
-              <input placeholder="Search.." className="searchBar" />
-            </div>
-            <div className="headerMenu">
-              <img src={menu} alt="menu" width="20" />
-            </div>
-          </div>
-          <div className="bodyContainer">
-            <div className="homePageOffers flexCenter">
-              <p>Offers in future</p>
-            </div>
-            <BookingContainer />
-            <div className="labsContaier">
-              <div className="homeHeading">
-                <p>Labs</p>
-              </div>
-              <div className="labsButtonsContainer">
-                {labsItems &&
-                  labsItems.map(({ name, icon }, index) => {
-                    return (
-                      <button className="labsButton flexCenter" key={index}>
-                        <FontAwesomeIcon
-                          icon={icon}
-                          className="labsButtonFontIcon"
-                        />
-                        <span className="labsButtonName">{name}</span>
-                      </button>
-                    );
-                  })}
-              </div>
-            </div>
-            <Insurance />
-          </div>
-        </>
-      )}
-    </div>
-  );
+const appState = (state) => state.appSlice;
+const homePageState = (state) => state.homePageSlice;
+
+const selectGlobalLocation = createSelector(appState, (appState) => {
+  const { state, city } = appState.globalLocation;
+  return { state, city };
+});
+
+const selectStateList = createSelector(homePageState, (homePageState) => {
+  return homePageState?.location?.stateList?.data;
+});
+
+const selectCityList = createSelector(homePageState, (homePageState) => {
+  return homePageState?.location?.cityList?.data;
+});
+
+const handleFetchLocationData = (fieldName, method, data = null, dispatch) => {
+  if (fieldName === 'state') {
+    dispatch(fetchStateList());
+    apiRequest('api/state')
+      .then((data) => dispatch(fetchStateListSuccess(data)))
+      .catch((error) => console.log('fetchStateError:', error));
+  } else if (fieldName === 'city') {
+    dispatch(fetchCityList());
+    apiRequest('api/city', {
+      method: 'post',
+      data,
+    })
+      .then((data) => dispatch(fetchCityListSuccess(data)))
+      .catch((error) => console.log('fetchCityError:', error));
+  }
 };
 
-export default HomePage;
+const mapStateToProps = (state, ownProps) => ({
+  globalLocation: selectGlobalLocation(state),
+  statesList: selectStateList(state),
+  citiesList: selectCityList(state),
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  fetchLocationData: (fieldName, method, data) =>
+    handleFetchLocationData(fieldName, method, data, dispatch),
+  updateGlobalLocation: (data) => dispatch(updateGlobalLocation(data)),
+  resetlocationFields: () => dispatch(resetlocationFields()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePageComponent);

@@ -20,12 +20,13 @@ const BookingContainer = () => {
       </div>
       <div className="bookingBody">
         {bookingItems &&
-          bookingItems.map(({ name, icon }, index) => {
+          bookingItems.map(({ name, src, alt }, index) => {
             return (
               <ImageButtons
                 name={name}
-                icon={icon}
+                src={src}
                 key={index}
+                alt={alt}
                 handleClick={handleOnClick}
               />
             );

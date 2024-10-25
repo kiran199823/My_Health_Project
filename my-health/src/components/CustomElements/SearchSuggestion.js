@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { InputField } from './InputField';
+import ImageButtons from './ImageButtons';
 
 const SearchSuggestion = (props) => {
   const {
@@ -10,7 +11,7 @@ const SearchSuggestion = (props) => {
     headerName,
     handleOnBack,
     onChange,
-    onSelect
+    onSelect,
   } = props;
 
   const [inputValue, setInputValue] = useState();
@@ -30,10 +31,12 @@ const SearchSuggestion = (props) => {
     }
   };
 
-  const handleOnDropDownSelect = (item) => {
-    if (typeof onSelect === 'function' && typeof handleOnBack === 'function') {
-      onSelect({ id, item });
-      handleOnBack();
+  const handleOnDropDownSelect = (selectedValue) => {
+    if (typeof onSelect === 'function') {
+      onSelect({ id, selectedValue });
+      if (typeof handleOnBack === 'function' && id !== 'state') {
+        handleOnBack();
+      }
     }
   };
 
@@ -41,12 +44,13 @@ const SearchSuggestion = (props) => {
     <div className="searchSuggestionContainer">
       {headerName && (
         <div className="searchSuggestionHeading">
-          <button
-            className="searchSuggestionHeadingButton"
+          <img
+            src="https://img.icons8.com/sf-black/64/FFFFFF/left.png"
+            alt="back"
+            width="30"
+            height="30"
             onClick={handleOnBack}
-          >
-            <span>back i</span>
-          </button>
+          />
           <p className="searchSuggestionHeadingName">{headerName}</p>
         </div>
       )}

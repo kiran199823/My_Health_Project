@@ -1,8 +1,7 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import the icon you want to use
 
 const ImageButtons = (props) => {
-  const { icon, name, key, handleClick } = props;
+  const { src, name, handleClick, alt } = props;
 
   const handleOnClick = (event) => {
     const buttonName = event.currentTarget.name; // using currentTarget because button constains both svg and span element.
@@ -12,11 +11,12 @@ const ImageButtons = (props) => {
     <>
       <button
         className="imageButtons"
-        key={key}
+        // key={keyValue}
         onClick={handleOnClick}
         name={name}
       >
-        <FontAwesomeIcon icon={icon} className="imageButtonFontIcon" />
+        {/* <FontAwesomeIcon icon={icon} className="imageButtonFontIcon" /> */}
+        <img width="48" height="48" src={src} alt={alt} />
         <span className="imageButtonsName">{name}</span>
       </button>
     </>

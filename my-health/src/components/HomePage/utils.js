@@ -22,36 +22,43 @@ export const getRedirectPath = (buttonName) => {
 export const bookingItems = [
   {
     name: 'Hospital',
-    icon: faHospital
+    src: 'https://img.icons8.com/fluency/48/hospital.png',
+    alt: 'hospital'
   },
   {
     name: 'Ambulance',
-    icon: faTruckMedical
+    src: 'https://img.icons8.com/fluency/48/ambulance.png',
+    alt: 'ambulance'
   },
   {
     name: 'Emergency',
-    icon: faKitMedical
+    src: 'https://img.icons8.com/fluency/48/siren.png',
+    alt: 'emergency'
   }
 ];
 
 export const labsItems = [
   {
     name: 'Lab booking',
-    icon: faMicroscope
+    src: 'https://img.icons8.com/fluency/48/microscope.png',
+    alt: 'lab'
   },
   {
     name: 'View reports',
-    icon: faFile
+    src: 'https://img.icons8.com/fluency/48/graph-report.png',
+    alt: 'reports'
   }
 ];
 
 export const insuranceItems = [
   {
     name: 'Book insurance',
-    icon: faFileMedical
+    src: 'https://img.icons8.com/fluency/48/security-checked--v1.png',
+    alt: 'insurance'
   },
   {
     name: 'My insurance',
-    icon: faFileWaveform
+    src: 'https://img.icons8.com/?size=100&id=E4VmOrv6BZqd&format=png&color=000000',
+    alt: 'myInsurance'
   }
 ];

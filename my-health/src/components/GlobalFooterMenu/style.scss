@@ -1,6 +1,13 @@
 .layout {
   height: 100dvh;
   width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.mainContents {
+  height: calc(100% - 40px);
+  // overflow-y: scroll; // This will scroll the main content, not the content inside
 }
 
 .menuFooterContainer {

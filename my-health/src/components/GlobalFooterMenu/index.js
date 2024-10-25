@@ -10,7 +10,7 @@ import history from '../assets/svgIcons/history.svg';
 const GlobalFooterMenu = () => {
   return (
     <div className="layout">
-      <div>
+      <div className='mainContents'>
         <Outlet /> {/* This will render the matched route component */}
       </div>
       <div className="menuFooterContainer flexCenter">

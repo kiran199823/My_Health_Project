@@ -1,35 +1,11 @@
-export const handleAPIDispatch = (id, dispatch) => {
-  switch (id) {
-    case 'state': {
-      dispatch.stateRequest();
-    }
-  }
-};
-
 export const getInputSearchItems = (id, suggestionItems) => {
   switch (id) {
-    case 'state': {
-      return {
-        id,
-        placeHolder: 'Enter State',
-        headerName: 'State',
-        suggestionItems
-      };
-    }
-    case 'city': {
-      return {
-        id,
-        placeHolder: 'Enter City',
-        headerName: 'City',
-        suggestionItems
-      };
-    }
     case 'hospital': {
       return {
         id,
         placeHolder: 'Enter hospital name',
         headerName: 'Hospital name',
-        suggestionItems: []
+        suggestionItems,
       };
     }
     case 'doctor': {
@@ -37,7 +13,7 @@ export const getInputSearchItems = (id, suggestionItems) => {
         id,
         placeHolder: 'Enter doctor name',
         headerName: 'Doctor name',
-        suggestionItems: []
+        suggestionItems: [],
       };
     }
     case 'specialist': {
@@ -45,8 +21,34 @@ export const getInputSearchItems = (id, suggestionItems) => {
         id,
         placeHolder: 'Enter specialist',
         headerName: 'Specialist',
-        suggestionItems: []
+        suggestionItems: [],
       };
     }
+    default:
+      return {};
   }
+};
+
+export const getResetFields = (fieldName, setInputValues, item) => {
+  let resetFields;
+
+  switch (fieldName) {
+    case 'hospital':
+      setInputValues((prev) => ({
+        ...prev,
+        hospital: item,
+        doctor: '',
+        specialist: '',
+      }));
+      resetFields = ['doctor', 'specialist'];
+      break;
+    case 'doctor':
+      setInputValues((prev) => ({ ...prev, doctor: item, specialist: '' }));
+      resetFields = ['specialist'];
+      break;
+    default:
+      resetFields = [];
+  }
+
+  return resetFields;
 };

@@ -42,7 +42,7 @@ export const InputField = (props) => {
         id={id}
         name={id}
         type={type}
-        value={value}
+        value={value || ''}
         onClick={onClick}
         onChange={onChangeInput}
         placeholder={placeHolder}
@@ -55,7 +55,7 @@ export const InputField = (props) => {
           {labelName}
         </label>
       )}
-      <p className="errorMessageStyles">{errorMessage}</p>
+      <span className="errorMessageStyles">{errorMessage}</span>
     </div>
   );
 };

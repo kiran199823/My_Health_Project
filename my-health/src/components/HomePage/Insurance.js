@@ -1,6 +1,6 @@
 import React from 'react';
 import { insuranceItems } from './utils';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Insurance = () => {
   return (
@@ -10,10 +10,11 @@ const Insurance = () => {
       </div>
       <div className="labsButtonsContainer">
         {insuranceItems &&
-          insuranceItems.map(({ name, icon }, index) => {
+          insuranceItems.map(({ name, src, alt }, index) => {
             return (
               <button className="labsButton flexCenter" key={index}>
-                <FontAwesomeIcon icon={icon} className="labsButtonFontIcon" />
+                {/* <FontAwesomeIcon icon={icon} className="labsButtonFontIcon" /> */}
+                <img width="48" height="48" src={src} alt={alt} />
                 <span className="labsButtonName">{name}</span>
               </button>
             );
