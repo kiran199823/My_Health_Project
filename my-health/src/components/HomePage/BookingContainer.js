@@ -5,11 +5,16 @@ import { bookingItems, getRedirectPath } from './utils';
 import ImageButtons from '../CustomElements/ImageButtons';
 import { useNavigate } from 'react-router-dom';
 
-const BookingContainer = () => {
+const BookingContainer = (props) => {
   const navigate = useNavigate();
+
+  const { fetchToken } = props;
 
   const handleOnClick = (buttonName) => {
     const path = getRedirectPath(buttonName);
+    if (buttonName === 'Hospital') {
+      fetchToken();
+    }
     navigate(path);
   };
 

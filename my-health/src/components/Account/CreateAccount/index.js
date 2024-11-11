@@ -7,10 +7,10 @@ import { Button } from '../../CustomElements/Button';
 import {
   dateValidation,
   emailValidation,
-  genderValidation,
+  genderValidator,
   nameValidation,
   passwordValidation,
-  phoneValidation
+  phoneValidation,
 } from '../../validations';
 import { useNavigate } from 'react-router-dom';
 import { userRequestBody } from './utils';
@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   signupCall,
   signupCallFail,
-  signupCallSuccess
+  signupCallSuccess,
 } from './createAccountReducer/createAccountSlice';
 import { signinSuccess } from '../Signin/signinReducer/signinSlice';
 import { INPUT_STYLE_MEDIUM } from '../../../constants';
@@ -49,7 +49,7 @@ const CreateAccount = () => {
     year: '',
     gender: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
   const step = params.get('st') || '1';
 
@@ -86,7 +86,7 @@ const CreateAccount = () => {
     event.preventDefault();
     const { date, month, year, gender } = userDetails;
     const isNotValidDate = dateValidation(date, month, year);
-    const isNotValidGender = genderValidation(gender);
+    const isNotValidGender = genderValidator(gender);
 
     const dateErrorMessage = isNotValidDate?.message;
     const genderErrorMessage = isNotValidGender?.message;
@@ -290,25 +290,25 @@ const CreateAccount = () => {
         return {
           leftMiddleHeading: 'Create account',
           leftBottomMessage: 'Enter contact details',
-          renderInputFields: contactField()
+          renderInputFields: contactField(),
         };
       case '2':
         return {
           leftMiddleHeading: 'Create account',
           leftBottomMessage: 'Enter your name',
-          renderInputFields: nameInputField()
+          renderInputFields: nameInputField(),
         };
       case '3':
         return {
           leftMiddleHeading: 'Basic Information',
           leftBottomMessage: 'Enter details',
-          renderInputFields: basicInputField()
+          renderInputFields: basicInputField(),
         };
       case '4':
         return {
           leftMiddleHeading: 'Password',
           leftBottomMessage: 'set your password',
-          renderInputFields: passwordInputField()
+          renderInputFields: passwordInputField(),
         };
     }
   };

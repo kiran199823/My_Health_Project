@@ -32,6 +32,8 @@ export const DropDown = (props) => {
         {...others}
       >
         <option value="" disabled hidden></option>
+        {/* when it's disabled it cannot be clicked, typed in, or submitted as part of a form */}
+        {/* hidden elements are not displayed on the page and take up no space in the layout */}
         {options &&
           options.map((option) => {
             return (

@@ -3,7 +3,7 @@ import './style.scss';
 import { InputField } from '../CustomElements/InputField';
 import { getResetFields } from './utils';
 import SearchSuggestion from '../CustomElements/SearchSuggestion';
-import { nameValidation } from '../validations';
+import { dateValidation } from '../validations';
 import LocationChange from '../LocationChange';
 import { useNavigate } from 'react-router-dom';
 import useRouteDetails from '../App/routeDetails';
@@ -22,6 +22,8 @@ const HospitalBooking = (props) => {
     currentLocation,
     updateCurrentLocation,
     resetRequiredFields,
+    registerbookingInfo,
+    cartId,
   } = props;
 
   const intialInputValues = {
@@ -44,6 +46,12 @@ const HospitalBooking = (props) => {
     }
   }, [inputSuggestionData]);
 
+  useEffect(() => {
+    if (cartId) {
+      navigate(`/doctorinfo/${cartId}`);
+    }
+  }, [cartId]);
+
   const handleOnSelect = (selectedItem) => {
     const { id: fieldName, selectedValue } = selectedItem; // id will be assigned to fieldName
 
@@ -60,6 +68,22 @@ const HospitalBooking = (props) => {
     setInputValues({ ...inputValues, [fieldName]: selectedValue });
   };
 
+  const handleDateChange = (events) => {
+    const fieldName = events.target.id;
+    const dateValue = events.target.value;
+    if (
+      fieldName === 'date' &&
+      inputValues.date &&
+      inputValues.date !== dateValue
+    ) {
+      const resetFields = getResetFields('date', setInputValues, dateValue);
+      resetRequiredFields(resetFields);
+      return;
+    }
+
+    setInputValues({ ...inputValues, date: dateValue });
+  };
+
   const handleOnClick = (events) => {
     const fieldName = events.target.id;
     setCurrentFieldName(fieldName);
@@ -67,6 +91,16 @@ const HospitalBooking = (props) => {
 
     if (fieldName === 'hospital') {
       data = { location: currentLocation };
+    } else if (fieldName === 'doctor') {
+      data = { location: currentLocation, hospital: inputValues?.hospital };
+    } else if (fieldName === 'specialist') {
+      data = {
+        location: currentLocation,
+        details: {
+          hospital: inputValues?.hospital,
+          doctor: inputValues?.doctor,
+        },
+      };
     }
     bookingInputsAPIDispatch(fieldName, 'post', data);
   };
@@ -83,17 +117,22 @@ const HospitalBooking = (props) => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    const { state, city, date } = event.target.elements;
-    const stateError = nameValidation(state.value);
-    const cityError = nameValidation(city.value);
-    const dateError = nameValidation(date.value);
-    if (stateError || cityError || dateError) {
+    const { date, hospital, doctor, specialist } = event.target.elements;
+    const [day, month, year] = date.value.split('-');
+    const dateError = dateValidation(day, month, year);
+    if (dateError) {
       setErrors({
-        state: stateError?.message,
-        city: cityError?.message,
         date: dateError?.message,
       });
+      return;
     }
+    const bookingInfo = {
+      date: date.value,
+      hospital: hospital.value,
+      doctor: doctor.value,
+      specialist: specialist.value,
+    };
+    registerbookingInfo(bookingInfo);
   };
 
   const closeLocationModel = () => {
@@ -133,9 +172,12 @@ const HospitalBooking = (props) => {
           <InputField
             id="date"
             labelName="Select date"
-            // placeHolder='DD/MM/YYYY'
+            placeHolder="Select date (DD-MM-YYYY)"
+            pattern="\d{2}-\d{2}-\d{4}"
             errorMessage={errors?.date}
             value={inputValues.date}
+            title="Format: dd-mm-yyyy"
+            onChange={handleDateChange}
           />
           <InputField
             id="hospital"

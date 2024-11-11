@@ -29,7 +29,7 @@ body {
   font-family: 'MyHealthNeueBlack', sans-serif;
   font-weight: 400;
   font-size: 15px;
-  background-color: $root-background-gray;
+  background-color: $white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -52,6 +52,17 @@ body {
 // label {
 //   display: block;
 // }
+
+.header {
+  width: 100%;
+  height: max(45px, 8%);
+  background-color: $header-color;
+  color: $white;
+  font-size: $header-fontsize;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
 
 .verticalLineBar {
   border: 1px solid $shadow-gray;

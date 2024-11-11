@@ -20,6 +20,13 @@ const hospitalBookingSlice = createSlice({
       city: initialStateData(),
     },
     hospital: initialStateData(),
+    doctor: initialStateData(),
+    specialist: initialStateData(),
+    bookingInfo: {
+      loading: false,
+      loaded: false,
+      cartId: '',
+    },
   },
   reducers: {
     updateCurrentLocation: (state, action) => {
@@ -27,6 +34,12 @@ const hospitalBookingSlice = createSlice({
         action.payload?.state ?? state.currentLocation.currentState;
       state.currentLocation.currentCity =
         action.payload?.city ?? state.currentLocation.currentCity;
+      if (
+        state.currentLocation.currentState &&
+        state.currentLocation.currentCity
+      ) {
+        document.cookie = `location=${state.currentLocation.currentState}-${state.currentLocation.currentCity}`;
+      }
     },
     fetchState: (state, action) => {
       const stateName = action?.payload;
@@ -63,6 +76,15 @@ const hospitalBookingSlice = createSlice({
         }
       });
     },
+    registerBookingInfo: (state, action) => {
+      state.bookingInfo.loading = true;
+      state.bookingInfo.loaded = false;
+    },
+    registerBookingInfoSuccess: (state, action) => {
+      state.bookingInfo.loading = false;
+      state.bookingInfo.loaded = true;
+      state.bookingInfo.cartId = action.payload?.cartId;
+    },
   },
 });
 
@@ -74,5 +96,7 @@ export const {
   fetchStateSuccess,
   resetlocationFields,
   updateCurrentLocation,
+  registerBookingInfo,
+  registerBookingInfoSuccess,
 } = hospitalBookingSlice.actions;
 export default hospitalBookingSlice.reducer;

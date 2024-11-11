@@ -8,6 +8,8 @@ import {
   fetchStateSuccess,
   resetlocationFields,
   updateCurrentLocation,
+  registerBookingInfo,
+  registerBookingInfoSuccess,
 } from '../hospitaBookingReducer/hospitalBookingSlice';
 import { apiRequest } from '../../../request';
 import { createSelector } from 'reselect';
@@ -58,6 +60,13 @@ const selectGetcities = createSelector(
   }
 );
 
+const selectGetCartId = createSelector(
+  selectHospitalBooking,
+  (bookingStateData) => {
+    return bookingStateData.bookingInfo.cartId;
+  }
+);
+
 // Dispatch functions
 const bookingInputsAPIDispatch = (
   fieldName,
@@ -89,6 +98,13 @@ const fetchLocationData = (
     .catch((error) => console.log('fetchStateError', error));
 };
 
+const handleRegisterBookingInfo = (data, dispatch) => {
+  dispatch(registerBookingInfo());
+  apiRequest('api/registerBookingInfo', { method: 'post', data })
+    .then((data) => dispatch(registerBookingInfoSuccess(data)))
+    .catch((error) => console.log('registerBookingInfo', error));
+};
+
 // mapDispatchToProps and mapStateToProps
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchLocationData: (fieldName, method, data) =>
@@ -100,6 +116,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   resetlocationFields: () => dispatch(resetlocationFields()),
   updateCurrentLocation: (location) =>
     dispatch(updateCurrentLocation(location)),
+  registerbookingInfo: (data) => handleRegisterBookingInfo(data, dispatch),
 });
 
 const mapStateToProps = (state, ownProps) => ({
@@ -109,6 +126,7 @@ const mapStateToProps = (state, ownProps) => ({
   statesData: selectGetStates(state),
   citiesData: selectGetcities(state),
   currentLocation: selectCurrentLocation(state),
+  cartId: selectGetCartId(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HospitalBooking);

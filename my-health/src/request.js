@@ -3,8 +3,9 @@ import axios from 'axios';
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:5000/', // Base URL for all requests
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true, // To pass cookies
 });
 
 export const apiRequest = async (url, options) => {
@@ -14,7 +15,7 @@ export const apiRequest = async (url, options) => {
       url,
       header: options?.header,
       data: options?.data,
-      params: options?.params
+      params: options?.params,
     });
 
     return response?.data;

@@ -9,7 +9,11 @@ import {
   fetchStateListSuccess,
   resetlocationFields,
 } from './homePageReducer/homePageSlice';
-import { updateGlobalLocation } from '../App/appReducer/appSlice';
+import {
+  fetchToken,
+  fetchTokenSuccess,
+  updateGlobalLocation,
+} from '../App/appReducer/appSlice';
 
 const appState = (state) => state.appSlice;
 const homePageState = (state) => state.homePageSlice;
@@ -44,6 +48,16 @@ const handleFetchLocationData = (fieldName, method, data = null, dispatch) => {
   }
 };
 
+const handleFetchToken = (dispatch) => {
+  dispatch(fetchToken());
+  apiRequest('api/gettoken')
+    .then((status) => {
+      dispatch(fetchTokenSuccess());
+      console.log('status', status);
+    })
+    .catch((error) => console.log('tokenError', error));
+};
+
 const mapStateToProps = (state, ownProps) => ({
   globalLocation: selectGlobalLocation(state),
   statesList: selectStateList(state),
@@ -55,6 +69,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     handleFetchLocationData(fieldName, method, data, dispatch),
   updateGlobalLocation: (data) => dispatch(updateGlobalLocation(data)),
   resetlocationFields: () => dispatch(resetlocationFields()),
+  fetchToken: () => handleFetchToken(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePageComponent);

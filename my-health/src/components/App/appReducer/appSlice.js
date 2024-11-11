@@ -10,6 +10,11 @@ const appSlice = createSlice({
       state: location?.state ?? 'Karnataka',
       city: location?.city ?? 'Bengaluru',
     },
+    tokenData: {
+      loading: false,
+      loaded: false,
+      token: '',
+    },
   },
   reducers: {
     updateGlobalLocation: (state, action) => {
@@ -30,8 +35,17 @@ const appSlice = createSlice({
       state.globalLocation.state = selectedState;
       state.globalLocation.city = selectedCity;
     },
+    fetchToken: (state, action) => {
+      state.tokenData.loading = true;
+      state.tokenData.loaded = false;
+    },
+    fetchTokenSuccess: (state, action) => {
+      state.tokenData.loading = false;
+      state.tokenData.loaded = true;
+    },
   },
 });
 
-export const { updateGlobalLocation } = appSlice.actions;
+export const { updateGlobalLocation, fetchToken, fetchTokenSuccess } =
+  appSlice.actions;
 export default appSlice.reducer;

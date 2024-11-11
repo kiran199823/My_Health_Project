@@ -16,6 +16,7 @@ const HomePageComponent = (props) => {
     citiesList,
     updateGlobalLocation,
     resetlocationFields,
+    fetchToken,
   } = props;
 
   const [isShowLocationModal, setIsShowLocationModal] = useState(false);
@@ -49,7 +50,7 @@ const HomePageComponent = (props) => {
             <div className="homePageOffers flexCenter">
               <p>Offers in future</p>
             </div>
-            <BookingContainer />
+            <BookingContainer fetchToken={fetchToken} />
             <div className="labsContaier">
               <div className="homeHeading">
                 <p>Labs</p>

@@ -13,7 +13,7 @@ export const getInputSearchItems = (id, suggestionItems) => {
         id,
         placeHolder: 'Enter doctor name',
         headerName: 'Doctor name',
-        suggestionItems: [],
+        suggestionItems,
       };
     }
     case 'specialist': {
@@ -21,7 +21,7 @@ export const getInputSearchItems = (id, suggestionItems) => {
         id,
         placeHolder: 'Enter specialist',
         headerName: 'Specialist',
-        suggestionItems: [],
+        suggestionItems,
       };
     }
     default:
@@ -33,6 +33,16 @@ export const getResetFields = (fieldName, setInputValues, item) => {
   let resetFields;
 
   switch (fieldName) {
+    case 'date':
+      setInputValues((prev) => ({
+        ...prev,
+        date: item,
+        hospital: '',
+        doctor: '',
+        specialist: '',
+      }));
+      resetFields = ['hospital', 'doctor', 'specialist'];
+      break;
     case 'hospital':
       setInputValues((prev) => ({
         ...prev,

@@ -48,7 +48,7 @@ export const InputField = (props) => {
         placeholder={placeHolder}
         {...others}
       />
-      {labelName && (
+      {labelName && !placeHolder && (
         <label
           className={`${labelClassName} ${hasContent ? 'moveUpLabel' : ''}`}
         >

@@ -5,6 +5,8 @@ import createAccountSlice from '../components/Account/CreateAccount/createAccoun
 import hospitalBookingSlice from '../components/HospitalBooking/hospitaBookingReducer/hospitalBookingSlice';
 import appSlice from '../components/App/appReducer/appSlice';
 import homePageSlice from '../components/HomePage/homePageReducer/homePageSlice';
+import doctorsInfoSlice from '../components/DoctorsInfo/doctorsInfoReducer/doctorsInfoSlice';
+import patientDetailsSlice from '../components/PatientDetails/patientDetailsReducer/patientDetailsSlice';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ const store = configureStore({
     hospitalBookingSlice,
     appSlice,
     homePageSlice,
+    doctorsInfoSlice,
+    patientDetailsSlice,
   },
 });
 
