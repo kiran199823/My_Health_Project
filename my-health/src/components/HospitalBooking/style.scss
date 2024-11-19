@@ -1,0 +1,99 @@
+@import 'src/styles/global/variables';
+
+.hospitalBookingContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  overflow-y: scroll;
+
+  .locationChangeContainer {
+    position: absolute;
+    height: 100dvh;
+    width: 100%;
+    background-color: $white;
+    display: flex;
+    justify-content: center;
+
+    .locationChangeForm {
+      width: 90%;
+    }
+  }
+}
+
+.hospitalBookingBackGroundImage {
+  width: 100%;
+  height: max(150px);
+  color: white;
+  border-radius: 15px;
+  background-color: $header-color;
+
+  .hospitalBookingHeading {
+    font-size: 2em;
+    padding-left: 5px;
+  }
+}
+
+.hospitalBookingBody {
+  border-radius: 15px;
+  width: 100%;
+  position: absolute;
+  top: max(120px);
+  background-color: $white;
+  padding-top: 8px;
+  display: flex;
+  justify-content: center;
+
+  .hospitalBookingBodyContent {
+    width: 90%;
+
+    .warningStyle {
+      color: $warning-color;
+
+      .locationChangeButton {
+        font-family: $font-family;
+        font-size: small;
+        background-color: $white;
+        color: $buttons-blue;
+        margin-left: 5px;
+        border: none;
+        border-bottom: 1px solid blue;
+        line-height: 1; // it is a distance between one line of text and the next line in a paragraph
+      }
+    }
+  }
+
+  .hospitalBookingBodyContentInputs {
+    width: 95%;
+    height: max(60px);
+    border-radius: 15px;
+    margin-bottom: 15px;
+
+    &::placeholder {
+      font-size: 1.5em;
+      padding-left: 5px;
+    }
+  }
+
+  .hospitalBookingBodyContentButtons {
+    width: 100%;
+    height: max(40px);
+    border-radius: 15px;
+    margin-bottom: 15px;
+    background-color: $buttons-blue;
+    color: $white;
+    font-size: 1.2em;
+    font-family: 'MyHealthNeueExtraBlack', sans-serif;
+  }
+
+  .hospitalBookingBodyContentButtonCancel {
+    @extend .hospitalBookingBodyContentButtons;
+
+    background-color: $white;
+    color: black;
+  }
+}
