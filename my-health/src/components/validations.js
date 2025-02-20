@@ -33,10 +33,10 @@ export const passwordValidation = (value) => {
       isRequired: true,
       message: 'Password required',
     };
-  } else if (value.length < 8) {
+  } else if (value.length < 6) {
     return {
       isLengthUnsatisfied: true,
-      message: 'Must be at least 8 char',
+      message: 'Must be at least 6 digits',
     };
   }
 };
@@ -71,13 +71,13 @@ export const dateValidation = (day, month, year) => {
   if (!(isValidDate && isValidMonth && isValidYear)) {
     return {
       isRequired: true,
-      message: 'Date is wrong',
+      message: 'Enter valid date of birth',
     };
   }
 };
 
 export const genderValidator = (value) => {
-  if (value === 'select') {
+  if (value === 'select' || !value) {
     return {
       isRequired: true,
       message: 'Please select gender',

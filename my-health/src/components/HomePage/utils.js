@@ -1,12 +1,8 @@
-import {
-  faHospital,
-  faTruckMedical,
-  faKitMedical,
-  faFile,
-  faMicroscope,
-  faFileWaveform,
-  faFileMedical
-} from '@fortawesome/free-solid-svg-icons';
+import hospital from '../assets/svgIcons/Hospital.png';
+import ambulance from '../assets/svgIcons/Ambulance.png';
+import emergency from '../assets/svgIcons/Emergency.png';
+import microscope from '../assets/svgIcons/Microscope.png';
+import labReports from '../assets/svgIcons/LabReports.png';
 
 export const getRedirectPath = (buttonName) => {
   switch (buttonName) {
@@ -22,43 +18,43 @@ export const getRedirectPath = (buttonName) => {
 export const bookingItems = [
   {
     name: 'Hospital',
-    src: 'https://img.icons8.com/fluency/48/hospital.png',
-    alt: 'hospital'
+    src: hospital,
+    alt: 'hospitalIcon',
   },
   {
     name: 'Ambulance',
-    src: 'https://img.icons8.com/fluency/48/ambulance.png',
-    alt: 'ambulance'
+    src: ambulance,
+    alt: 'ambulance',
   },
   {
     name: 'Emergency',
-    src: 'https://img.icons8.com/fluency/48/siren.png',
-    alt: 'emergency'
-  }
+    src: emergency,
+    alt: 'emergency',
+  },
 ];
 
 export const labsItems = [
   {
-    name: 'Lab booking',
-    src: 'https://img.icons8.com/fluency/48/microscope.png',
-    alt: 'lab'
+    name: 'Book',
+    src: microscope,
+    alt: 'lab',
   },
   {
-    name: 'View reports',
-    src: 'https://img.icons8.com/fluency/48/graph-report.png',
-    alt: 'reports'
-  }
+    name: 'Reports',
+    src: labReports,
+    alt: 'LabReports',
+  },
 ];
 
 export const insuranceItems = [
   {
     name: 'Book insurance',
     src: 'https://img.icons8.com/fluency/48/security-checked--v1.png',
-    alt: 'insurance'
+    alt: 'insurance',
   },
   {
     name: 'My insurance',
     src: 'https://img.icons8.com/?size=100&id=E4VmOrv6BZqd&format=png&color=000000',
-    alt: 'myInsurance'
-  }
+    alt: 'myInsurance',
+  },
 ];

@@ -6,11 +6,11 @@ const signinSlice = createSlice({
     findEmail: {
       loading: false,
       loaded: false,
-      data: {}
+      data: {},
     },
     user: {
-      userData: ''
-    }
+      userData: '',
+    },
   },
   reducers: {
     intialLoad: (state) => {
@@ -35,8 +35,8 @@ const signinSlice = createSlice({
     removeSignedInUser: (state, action) => {
       localStorage.removeItem('user');
       state.user.userData = '';
-    }
-  }
+    },
+  },
 });
 
 export const { signinCall, signinSuccess, removeSignedInUser, intialLoad } =

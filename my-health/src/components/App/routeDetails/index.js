@@ -8,7 +8,7 @@ const useRouteDetails = () => {
   return {
     pathname,
     queryParams,
-    state
+    state,
   };
 };
 

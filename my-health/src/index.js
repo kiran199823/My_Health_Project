@@ -13,30 +13,33 @@ import HospitalBookingContainer from './components/HospitalBooking/HospitalBooki
 import DoctorsInfo from './components/DoctorsInfo';
 import PatientDetails from './components/PatientDetails';
 import Checkout from './components/Checkout';
+import { MyHealthProvider } from './components/MyHealthContexProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<GlobalFooterMenu />}>
-            <Route index element={<HomePage />} />{' '}
-            {/* index is added to make sure home page route is matched along with global footer even after matching '/' to global footer */}
-            <Route path="/signin" exact element={<Signin />} />
-            <Route path="/create-account" element={<CreateAccount />} />
-            <Route
-              path="/hospital-booking"
-              element={<HospitalBookingContainer />}
-            />
-            <Route path="/doctorinfo/:cartId" element={<DoctorsInfo />} />
-            <Route
-              path="/patientDetails/:cartId"
-              element={<PatientDetails />}
-            />
-            <Route path="/checkout/:cartId" element={<Checkout />} />
-          </Route>
-        </Routes>
+        <MyHealthProvider>
+          <Routes>
+            <Route path="/" element={<GlobalFooterMenu />}>
+              <Route index element={<HomePage />} />{' '}
+              {/* index is added to make sure home page route is matched along with global footer even after matching '/' to global footer */}
+              <Route path="/signin" exact element={<Signin />} />
+              <Route path="/create-account" element={<CreateAccount />} />
+              <Route
+                path="/hospital-booking"
+                element={<HospitalBookingContainer />}
+              />
+              <Route path="/doctorinfo/:cartId" element={<DoctorsInfo />} />
+              <Route
+                path="/patientDetails/:cartId"
+                element={<PatientDetails />}
+              />
+              <Route path="/checkout/:cartId" element={<Checkout />} />
+            </Route>
+          </Routes>
+        </MyHealthProvider>
       </BrowserRouter>
     </React.StrictMode>
   </Provider>

@@ -17,9 +17,7 @@ const AccountLayout = ({ children, ...props }) => {
             <div>
               <span className="accountaccountText">{leftMiddleHeading}</span>
               <div>
-                <span className="googleAccountMessage">
-                  {leftBottomMessage}
-                </span>
+                <p className="googleAccountMessage">{leftBottomMessage}</p>
               </div>
             </div>
           </div>
@@ -34,7 +32,7 @@ AccountLayout.propTypes = {
   leftMiddleHeading: PropTypes.string,
   leftBottomMessage: PropTypes.string,
   children: PropTypes.any,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 };
 
 export default AccountLayout;
