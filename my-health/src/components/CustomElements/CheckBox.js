@@ -6,11 +6,12 @@ export const CheckBox = (props) => {
   return (
     <>
       <input className="customCheckbox" type="checkbox" />
-      <label>{labelName}</label>
+      &nbsp;
+      <label className='checkBoxLabel'>{labelName}</label>
     </>
   );
 };
 
 CheckBox.propTypes = {
-  labelName: PropTypes.string
+  labelName: PropTypes.string,
 };

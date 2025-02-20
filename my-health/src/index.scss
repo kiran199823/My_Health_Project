@@ -29,9 +29,14 @@ body {
   font-family: 'MyHealthNeueBlack', sans-serif;
   font-weight: 400;
   font-size: 15px;
-  background-color: $white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.darkTheme {
+  background-color: black;
+}
+.lightTheme {
+  background-color: $white;
 }
 
 .extraBlack {

@@ -13,6 +13,7 @@ $maxWidth: 966px;
   border-radius: 30px;
   background-color: $white;
   padding: 2%;
+  padding-top: max(40px, 10%);
   display: flex;
   position: relative;
 
@@ -26,11 +27,11 @@ $maxWidth: 966px;
 
 .accountMessageContainer {
   min-width: 50%;
-  min-height: 40%;
+  height: 30%;
 }
 
 .accountMHLogo {
-  font-size: 50px;
+  font-size: 60px;
   color: $myhealth-blue;
 }
 
@@ -44,10 +45,8 @@ $maxWidth: 966px;
 }
 
 .accountField {
-  min-width: 50%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  min-width: 100%;
+  min-height: 60%;
+  display: grid;
+  place-items: center;
 }

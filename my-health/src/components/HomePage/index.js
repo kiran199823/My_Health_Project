@@ -14,6 +14,8 @@ import {
   fetchTokenSuccess,
   updateGlobalLocation,
 } from '../App/appReducer/appSlice';
+import { getlocalUserId } from '../globalSelector';
+import { removeSignedInUser } from '../Account/Signin/signinReducer/signinSlice';
 
 const appState = (state) => state.appSlice;
 const homePageState = (state) => state.homePageSlice;
@@ -48,7 +50,7 @@ const handleFetchLocationData = (fieldName, method, data = null, dispatch) => {
   }
 };
 
-const handleFetchToken = (dispatch) => {
+export const handleFetchToken = (dispatch) => {
   dispatch(fetchToken());
   apiRequest('api/gettoken')
     .then((status) => {
@@ -62,6 +64,7 @@ const mapStateToProps = (state, ownProps) => ({
   globalLocation: selectGlobalLocation(state),
   statesList: selectStateList(state),
   citiesList: selectCityList(state),
+  localUserId: getlocalUserId(),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -70,6 +73,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   updateGlobalLocation: (data) => dispatch(updateGlobalLocation(data)),
   resetlocationFields: () => dispatch(resetlocationFields()),
   fetchToken: () => handleFetchToken(dispatch),
+  removeSignedInUser: () => dispatch(removeSignedInUser()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePageComponent);
