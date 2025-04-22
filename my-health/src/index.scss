@@ -1,0 +1,109 @@
+@import 'src/styles/global/variables';
+
+@font-face {
+  font-family: 'MyHealthNeueBlack';
+  src: url('../public/fonts/Neue Plak Text Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MyHealthNeueExtraBlack';
+  src: url('../public/fonts/Neue Plak ExtraBlack.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+:root {
+  --search-bar-height: 35px; // only for css, not scss
+}
+
+body {
+  margin: 0;
+  /* font-family: "Rubik", sans-serif; */
+  font-family: 'MyHealthNeueBlack', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.darkTheme {
+  background-color: black;
+}
+.lightTheme {
+  background-color: $white;
+}
+
+.extraBlack {
+  font-family: 'MyHealthNeueExtraBlack', sans-serif;
+}
+
+.fullScreen {
+  height: 100dvh;
+  width: 100vw;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// label {
+//   display: block;
+// }
+
+.header {
+  width: 100%;
+  height: max(45px, 8%);
+  background-color: $header-color;
+  color: $white;
+  font-size: $header-fontsize;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.verticalLineBar {
+  border: 1px solid $shadow-gray;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  width: 100%;
+}
+
+.load {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background-color: $light-blue;
+  animation: load 2.5s infinite;
+  z-index: 1000;
+}
+
+@keyframes load {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 99%;
+  }
+
+  100% {
+    width: 0;
+    left: 100%;
+  }
+}

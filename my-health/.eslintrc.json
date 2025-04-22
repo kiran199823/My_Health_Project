@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "standard",
+    "plugin:react/recommended",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "no-unused-vars": "warn",
+    "quotes": ["warn", "single"], // Changed 'error' to 'warn'
+    "semi": ["off"], // Disables strict enforcement of semicolons
+    "no-extra-semi": "warn", // Disallows unnecessary semicolons
+    "brace-style": ["warn", "1tbs", { "allowSingleLine": true }], // Allows single-line blocks
+    "react/prop-types": "warn",
+    "no-trailing-spaces": "warn"
+  }
+}

@@ -1,0 +1,131 @@
+@import '/src/styles/global/variables.scss';
+
+.checkoutContainer {
+  width: 100%;
+  height: 100%;
+  justify-items: center;
+  position: relative;
+
+  .body {
+    width: 95%;
+    height: 100%;
+
+    .fareContainer {
+      width: 100%;
+      margin-bottom: max(20px);
+
+      table {
+        width: 100%;
+        justify-items: start;
+        font-family: sans-serif;
+        padding: 0 5px;
+        border: 2px solid $shadow-gray;
+        border-radius: 10px;
+        // border-collapse: collapse;
+
+        th:nth-child(1),
+        td:nth-child(1) {
+          text-align: left;
+        }
+        // td:nth-child(1), th:nth-child(1): This selector targets the first cell in every row (<td> and <th>), aligning the text to the left
+
+        th:nth-child(2),
+        td:nth-child(2) {
+          text-align: right;
+        }
+        // td:nth-child(2), th:nth-child(2): This selector targets the second cell in every row and aligns the text to the right.
+
+        th,
+        .total {
+          font-family: 'MyHealthNeueBlack';
+        }
+      }
+    }
+
+    .paymentContainer {
+      width: 100%;
+      border: 2px solid $shadow-gray;
+      border-radius: 10px;
+      padding: 0 5px 5px;
+      margin-bottom: max(20px);
+
+      .subHeading {
+        font-family: sans-serif;
+      }
+
+      .UPIContainer {
+        width: 100%;
+
+        .UPIsListCard {
+          width: 30%;
+          display: grid;
+          justify-items: center;
+        }
+      }
+    }
+
+    .buttonContainer {
+      width: 100%;
+      height: 80%;
+
+      .payButton {
+        width: 100%;
+        height: min(30px, 7%);
+        background-color: $buttons-blue;
+        color: $white;
+        border: none;
+        border-radius: 5px;
+        font-family: 'MyHealthNeueBlack';
+      }
+    }
+  }
+  .upiModel {
+    width: 80%;
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    display: grid;
+    background: rgba($shadow-gray, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    padding: 20px;
+
+    label {
+      margin-bottom: 5px;
+    }
+    input {
+      margin-bottom: 30px;
+      height: min(40px, 90%);
+      border-radius: 10px;
+      border: none;
+    }
+    button {
+      height: max(30px);
+      border-radius: 10px;
+      border: none;
+      background-color: rgb(47, 203, 47);
+      color: $white;
+    }
+  }
+
+  .confirmationContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $white;
+    align-content: center;
+    justify-items: center;
+
+    .confirmationCircle {
+      width: 50%;
+      height: 30%;
+      justify-items: center;
+      align-content: center;
+      background: rgb(47, 203, 47);
+      border-radius: 100px;
+      color: $white;
+    }
+  }
+}
